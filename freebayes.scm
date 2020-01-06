@@ -13,7 +13,7 @@
 
 (define-public freebayes
   (let ((version "v1.3.2")
-        (commit "f4fbc319d155cc8c108cf97bb26c2129f17a41ac")
+        (commit "d85b897b8190b4e2c058a2f9c57c0a12bef2025f")
         (package-revision "0"))
     (package
      (name "freebayes")
