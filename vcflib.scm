@@ -2,7 +2,7 @@
                #:use-module (guix packages)
                #:use-module (guix git-download)
                #:use-module (guix build-system gnu)
-               #:use-module (guix licenses)
+               #:use-module ((guix licenses) #:prefix license:)
                #:use-module (gnu packages base)
                #:use-module (gnu packages gcc)
                #:use-module (gnu packages cmake)
@@ -14,10 +14,10 @@
 (define-public vcflib
   (let ((version "v1.0.1")
         (commit "9173df9ccff52daa4b3849b0e8d28dd4a7ecb39b")
-        (package-revision "0"))
+        (package-revision "1"))
     (package
      (name "vcflib")
-     (version (string-append (git-version version "+" commit) "-" package-revision))
+     (version (string-append version "+" (string-take commit 7) "-" package-revision))
      (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -177,11 +177,16 @@
      (native-inputs
       `(("wget" ,wget)
         ("cmake" ,cmake)
+        ("gcc" ,gcc-9)
         ("zlib" ,zlib)))
      (synopsis "vcflib variant call file (VCF) manipulation and analysis")
      (description
-      "vcflib provides methods to manipulate and interpret sequence variation as it can be described by VCF. It is both: an API for parsing and operating on records of genomic variation as it can be described by the VCF format, and a collection of command-line utilities for executing complex manipulations on VCF files.")
+"vcflib provides methods to manipulate and interpret sequence variation as it
+can be described by VCF.  It is both: an API for parsing and operating on
+records of genomic variation as it can be described by the VCF format, and a
+collection of command-line utilities for executing complex manipulations on VCF
+files.")
      (home-page "https://github.com/vcflib/vcflib")
-     (license expat))))
+     (license license:expat))))
 
 vcflib

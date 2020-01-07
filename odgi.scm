@@ -16,7 +16,7 @@
 
 (define-public odgi
   (let ((version "v0.1.0")
-        (commit "2c5f8c04dfa4c447a10f27e96227148cb9355264")
+        (commit "d3133db4d35e16ea374bf6f8b6d1d714e973117d")
         (package-revision "1"))
     (package
      (name "odgi")
@@ -30,33 +30,26 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1drrcfyy4mny56vfrlrq62q2mcrbz85af7p3phzxhalavjspm433"))))
+                "1ja17xms87519ixfksq2imvgfh4pbf2ll60xqyn0wynilhcxgylb"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
         (modify-phases
          %standard-phases
-         ;; Setting the SHELL environment variable is required by SeqLib's configure script
-         ;(add-after 'unpack 'set-shell
-         ;           (lambda _
-         ;             (setenv "CONFIG_SHELL" (which "sh"))
-         ;             #t))
-         ;(delete 'configure)
-         (delete 'check)
-         (replace 'install
-                  (lambda* (#:key outputs #:allow-other-keys)
-                           (let ((bin (string-append (assoc-ref outputs "out") "/bin")))
-                             (install-file "bin/odgi" bin)))))
+         (delete 'check))
         #:make-flags (list "CC=gcc")))
      (native-inputs
       `(("cmake" ,cmake)
         ("glibc" ,glibc)
+        ("gcc" ,gcc-9)
         ("python" ,python)
         ("pybind11" ,pybind11)
         ("zlib" ,zlib)))
      (synopsis "odgi optimized dynamic sequence graph implementation")
      (description
-      "odgi provides an efficient, succinct dynamic DNA sequence graph model, as well as a host of algorithms that allow the use of such graphs in bioinformatic analyses.")
+"odgi provides an efficient, succinct dynamic DNA sequence graph model, as well
+as a host of algorithms that allow the use of such graphs in bioinformatic
+analyses.")
      (home-page "https://github.com/ekg/freebayes")
      (license license:expat))))
 

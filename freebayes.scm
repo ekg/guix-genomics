@@ -2,7 +2,7 @@
                #:use-module (guix packages)
                #:use-module (guix git-download)
                #:use-module (guix build-system gnu)
-               #:use-module (guix licenses)
+               #:use-module ((guix licenses) #:prefix license:)
                #:use-module (gnu packages base)
                #:use-module (gnu packages gcc)
                #:use-module (gnu packages cmake)
@@ -14,10 +14,10 @@
 (define-public freebayes
   (let ((version "v1.3.2")
         (commit "d85b897b8190b4e2c058a2f9c57c0a12bef2025f")
-        (package-revision "0"))
+        (package-revision "1"))
     (package
      (name "freebayes")
-     (version (string-append (git-version version "+" commit) "-" package-revision))
+     (version (string-append version "+" (string-take commit 7) "-" package-revision))
      (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -52,12 +52,17 @@
         #:make-flags (list "CC=gcc")))
      (native-inputs
       `(("wget" ,wget)
+        ("gcc" ,gcc-9)
         ("cmake" ,cmake)
         ("zlib" ,zlib)))
      (synopsis "freebayes haplotype-based genetic variant caller")
      (description
-      "freebayes is a Bayesian genetic variant detector designed to find small polymorphisms, specifically SNPs (single-nucleotide polymorphisms), indels (insertions and deletions), MNPs (multi-nucleotide polymorphisms), and complex events (composite insertion and substitution events) smaller than the length of a short-read sequencing alignment.")
+"freebayes is a Bayesian genetic variant detector designed to find small
+polymorphisms, specifically SNPs (single-nucleotide polymorphisms), indels
+(insertions and deletions), MNPs (multi-nucleotide polymorphisms), and complex
+events (composite insertion and substitution events) smaller than the length of
+a short-read sequencing alignment.")
      (home-page "https://github.com/ekg/freebayes")
-     (license expat))))
+     (license license:expat))))
 
 freebayes
