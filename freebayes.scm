@@ -13,7 +13,7 @@
 
 (define-public freebayes
   (let ((version "v1.3.2")
-        (commit "e9e83786de469288c19011d12b2d2b58e11188d5")
+        (commit "ae982457b87e7de50fb70c9f7983b598d6caa176")
         (package-revision "1"))
     (package
      (name "freebayes")
@@ -27,7 +27,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "18zk7f4jwlj57acw11lgvadx1kmm35mihgrj5n43k1j0il54mvgr"))))
+                "09fiswd4b59ikv95wn37x3qlpcx00gx6iff37029v4pjr4hfp0pd"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
