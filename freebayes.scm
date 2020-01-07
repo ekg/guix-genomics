@@ -1,7 +1,7 @@
 (define-module (freebayes)
                #:use-module (guix packages)
                #:use-module (guix git-download)
-               #:use-module (guix build-system gnu)
+               #:use-module (guix build-system cmake)
                #:use-module ((guix licenses) #:prefix license:)
                #:use-module (gnu packages base)
                #:use-module (gnu packages gcc)
@@ -13,7 +13,7 @@
 
 (define-public freebayes
   (let ((version "v1.3.2")
-        (commit "d85b897b8190b4e2c058a2f9c57c0a12bef2025f")
+        (commit "e9e83786de469288c19011d12b2d2b58e11188d5")
         (package-revision "1"))
     (package
      (name "freebayes")
@@ -27,8 +27,8 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0lwa4zl0i5mi42fa6wjf68r1g6n0iyrvb0inqlllrc7xi0a92x3z"))))
-     (build-system gnu-build-system)
+                "18zk7f4jwlj57acw11lgvadx1kmm35mihgrj5n43k1j0il54mvgr"))))
+     (build-system cmake-build-system)
      (arguments
       `(#:phases
         (modify-phases
@@ -39,17 +39,11 @@
                       (setenv "CONFIG_SHELL" (which "sh"))
                       #t))
          ;; This stashes our build version in the executable
-         (replace 'configure
-                  (lambda _
-                    (substitute* "src/version_release.txt" (("v1.0.0") ,version))
-                    #t))
-         (delete 'check)
-         (replace 'install
-                  (lambda* (#:key outputs #:allow-other-keys)
-                           (let ((bin (string-append (assoc-ref outputs "out") "/bin")))
-                             (install-file "bin/freebayes" bin)
-                             (install-file "bin/bamleftalign" bin)))))
-        #:make-flags (list "CC=gcc")))
+         (add-after 'unpack 'set-version
+                    (lambda _
+                      (substitute* "src/version_release.txt" (("v1.0.0") ,version))
+                      #t))
+         (delete 'check))))
      (native-inputs
       `(("wget" ,wget)
         ("gcc" ,gcc-9)
