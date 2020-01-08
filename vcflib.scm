@@ -1,15 +1,15 @@
 (define-module (vcflib)
-               #:use-module (guix packages)
-               #:use-module (guix git-download)
-               #:use-module (guix build-system cmake)
-               #:use-module ((guix licenses) #:prefix license:)
-               #:use-module (gnu packages base)
-               #:use-module (gnu packages gcc)
-               #:use-module (gnu packages cmake)
-               #:use-module (gnu packages python)
-               #:use-module (gnu packages wget)
-               #:use-module (gnu packages bash)
-               #:use-module (gnu packages compression))
+  #:use-module (guix packages)
+  #:use-module (guix git-download)
+  #:use-module (guix build-system cmake)
+  #:use-module ((guix licenses) #:prefix license:)
+  #:use-module (gnu packages base)
+  #:use-module (gnu packages gcc)
+  #:use-module (gnu packages cmake)
+  #:use-module (gnu packages python)
+  #:use-module (gnu packages wget)
+  #:use-module (gnu packages bash)
+  #:use-module (gnu packages compression))
 
 (define-public vcflib
   (let ((version "v1.0.1")
@@ -54,5 +54,3 @@ collection of command-line utilities for executing complex manipulations on VCF
 files.")
      (home-page "https://github.com/vcflib/vcflib")
      (license license:expat))))
-
-vcflib

@@ -1,15 +1,15 @@
 (define-module (freebayes)
-               #:use-module (guix packages)
-               #:use-module (guix git-download)
-               #:use-module (guix build-system cmake)
-               #:use-module ((guix licenses) #:prefix license:)
-               #:use-module (gnu packages base)
-               #:use-module (gnu packages gcc)
-               #:use-module (gnu packages cmake)
-               #:use-module (gnu packages python)
-               #:use-module (gnu packages wget)
-               #:use-module (gnu packages bash)
-               #:use-module (gnu packages compression))
+  #:use-module (guix packages)
+  #:use-module (guix git-download)
+  #:use-module (guix build-system cmake)
+  #:use-module ((guix licenses) #:prefix license:)
+  #:use-module (gnu packages base)
+  #:use-module (gnu packages gcc)
+  #:use-module (gnu packages cmake)
+  #:use-module (gnu packages python)
+  #:use-module (gnu packages wget)
+  #:use-module (gnu packages bash)
+  #:use-module (gnu packages compression))
 
 (define-public freebayes
   (let ((version "v1.3.2")
@@ -58,5 +58,3 @@ events (composite insertion and substitution events) smaller than the length of
 a short-read sequencing alignment.")
      (home-page "https://github.com/ekg/freebayes")
      (license license:expat))))
-
-freebayes
