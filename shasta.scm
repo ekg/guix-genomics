@@ -59,7 +59,14 @@
               (substitute* "dynamicExecutable/CMakeLists.txt"
                 (("set_target_properties\\(shastaDynamicExecutable PROPERTIES INSTALL_RPATH.*$") ""))
               #t))
-          (delete 'check))))
+          (delete 'check)
+          (add-after 'install 'provide-libboost_python
+            (lambda* (#:key outputs #:allow-other-keys)
+              (let ((out (assoc-ref %outputs "out")))
+                (with-directory-excursion (string-append out "/bin")
+                  (symlink "shastaDynamic" "shasta"))
+                #t)))
+          )))
      (native-inputs
       `(("gcc" ,gcc-9)
         ("cmake" ,cmake)
