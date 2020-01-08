@@ -1,8 +1,10 @@
 (define-module (shasta)
   #:use-module (guix packages)
   #:use-module (guix git-download)
+  #:use-module (guix utils)
   #:use-module (guix build-system cmake)
   #:use-module ((guix licenses) #:prefix license:)
+  #:use-module (gnu packages)
   #:use-module (gnu packages base)
   #:use-module (gnu packages gcc)
   #:use-module (gnu packages cmake)
@@ -35,13 +37,15 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "00j1ss9wj27fjcr7qzkapwkjhs050r2czbi45k91fyp0qm4ka32l"))))
+                "00j1ss9wj27fjcr7qzkapwkjhs050r2czbi45k91fyp0qm4ka32l"))
+              (patches (search-patches "shasta-make-install-target-configurable.patch"))))
      (build-system cmake-build-system)
      (arguments
       `(#:configure-flags
         (list "-DBUILD_STATIC_EXECUTABLE=0"
               "-DBUILD_STATIC_LIBRARY=0"
-              "-DBUILD_APPIMAGE=0")
+              "-DBUILD_APPIMAGE=0"
+              (string-append "-DCMAKE_INSTALL_RPATH=" (assoc-ref %outputs "out") "/lib"))
         #:phases
         (modify-phases %standard-phases
           (add-after 'unpack 'fix-pybind11
@@ -50,21 +54,12 @@
                 (("python3 -m pybind11 --includes") "python3-config --includes")
                 (("/usr/bin/python3-config") "python3-config"))
               #t))
-          (add-after 'unpack 'fix-install-target
+          (add-after 'unpack 'fix-rpath
             (lambda _
-              (substitute* "CMakeLists.txt"
-                (("shasta-install/bin") "bin"))
               (substitute* "dynamicExecutable/CMakeLists.txt"
-                (("shasta-install/bin") "bin"))
-              (substitute* "dynamicLibrary/CMakeLists.txt"
-                (("shasta-install/bin") "bin"))
+                (("set_target_properties\\(shastaDynamicExecutable PROPERTIES INSTALL_RPATH.*$") ""))
               #t))
-          (delete 'check)
-          ;(replace 'install
-          ;  (lambda* (#:key outputs #:allow-other-keys)
-          ;    (let ((bin (string-append (assoc-ref outputs "out") "/bin")))
-          ;      (install-file "../build/dynamicLibrary/shastaDynamic" bin))))
-          )))
+          (delete 'check))))
      (native-inputs
       `(("gcc" ,gcc-9)
         ("cmake" ,cmake)
