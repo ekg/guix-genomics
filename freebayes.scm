@@ -13,8 +13,8 @@
 
 (define-public freebayes
   (let ((version "v1.3.2")
-        (commit "ae982457b87e7de50fb70c9f7983b598d6caa176")
-        (package-revision "4"))
+        (commit "71a3e1c5eb8083a6f4205b65918323251162634a")
+        (package-revision "1"))
     (package
      (name "freebayes")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -27,7 +27,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "09fiswd4b59ikv95wn37x3qlpcx00gx6iff37029v4pjr4hfp0pd"))))
+                "1nhclcpaa0jz95kvd1dl2gvc14ilaq5qmbmhnd0qg6wmbgm8brdb"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -46,6 +46,7 @@
          (delete 'check))))
      (native-inputs
       `(("wget" ,wget)
+        ("gcc" ,gcc-9)
         ("cmake" ,cmake)
         ("zlib" ,zlib)))
      (synopsis "freebayes haplotype-based genetic variant caller")
