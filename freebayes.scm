@@ -9,13 +9,12 @@
   #:use-module (gnu packages python)
   #:use-module (gnu packages wget)
   #:use-module (gnu packages bash)
-  #:use-module (gnu packages commencement)
   #:use-module (gnu packages compression))
 
 (define-public freebayes
   (let ((version "v1.3.2")
         (commit "ae982457b87e7de50fb70c9f7983b598d6caa176")
-        (package-revision "3"))
+        (package-revision "4"))
     (package
      (name "freebayes")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -47,9 +46,7 @@
          (delete 'check))))
      (native-inputs
       `(("wget" ,wget)
-        ("gcc" ,gcc-9.2.0)
         ("cmake" ,cmake)
-        ("gcc-toolchain" ,gcc-toolchain-9.2.0)
         ("zlib" ,zlib)))
      (synopsis "freebayes haplotype-based genetic variant caller")
      (description
