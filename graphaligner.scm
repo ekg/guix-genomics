@@ -19,7 +19,7 @@
 
 (define-public graphaligner
   (let ((version "1.0.10")
-        (commit "849a7fb1360e7b1e09d361d65f3f9f1316f33875")
+        (commit "d709c45c192ca3dcf5e1fa15e89bedab8e300de7")
         (package-revision "1"))
     (package
      (name "graphaligner")
@@ -33,7 +33,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1skmncd9aan7ffv7fxzzs93dhgjj1hmn8z994m5sqrwsafzd20rm"))))
+                "04vj4k2ic8s3n14p11y5sg2xndgf214ml97nls0mis4pnmp14397"))))
      (build-system gnu-build-system)
      (arguments
       `(#:tests? #f ; no tests
