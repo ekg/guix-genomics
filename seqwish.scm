@@ -12,9 +12,9 @@
   #:use-module (gnu packages compression))
 
 (define-public seqwish
-  (let ((version "v0.2.0")
+  (let ((version "0.2.0")
         (commit "209d0bcb419049f7adddb2e976d52b20d6e17605")
-        (package-revision "1"))
+        (package-revision "2"))
     (package
      (name "seqwish")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))

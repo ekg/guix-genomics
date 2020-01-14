@@ -12,9 +12,9 @@
   #:use-module (gnu packages compression))
 
 (define-public vcflib
-  (let ((version "v1.0.1")
+  (let ((version "1.0.1")
         (commit "40dbb399b5d25ae694e15755724475b274d1b8fe")
-        (package-revision "1"))
+        (package-revision "2"))
     (package
      (name "vcflib")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))

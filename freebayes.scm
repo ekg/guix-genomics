@@ -12,9 +12,9 @@
   #:use-module (gnu packages compression))
 
 (define-public freebayes
-  (let ((version "v1.3.2")
+  (let ((version "1.3.2")
         (commit "71a3e1c5eb8083a6f4205b65918323251162634a")
-        (package-revision "1"))
+        (package-revision "2"))
     (package
      (name "freebayes")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))

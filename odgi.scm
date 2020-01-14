@@ -15,7 +15,7 @@
   #:use-module (gnu packages compression))
 
 (define-public odgi
-  (let ((version "v0.1.0")
+  (let ((version "0.1.0")
         (commit "d3133db4d35e16ea374bf6f8b6d1d714e973117d")
         (package-revision "1"))
     (package

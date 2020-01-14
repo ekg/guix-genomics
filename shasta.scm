@@ -22,9 +22,9 @@
 
 
 (define-public shasta
-  (let ((version "v0.3.0")
+  (let ((version "0.3.0")
         (commit "fcf99d3c9958a4d971c78182274db6c6e1b92ba2")
-        (package-revision "4"))
+        (package-revision "5"))
     (package
      (name "shasta")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -95,9 +95,9 @@ of short k-mers (k ≈ 10).")
      (license license:expat))))
 
 (define-public spoa
-  (let ((version "v3.0.1")
+  (let ((version "3.0.1")
         (commit "9dbcd7aa223c1e7fa789530c39fcd143d3886d3b")
-        (package-revision "3"))
+        (package-revision "4"))
     (package
      (name "spoa")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -136,9 +136,9 @@ vectorization (marginally faster due to high latency shifts).")
      (license license:expat))))
 
 (define-public marginPhase
-  (let ((version "v0.0.0")
+  (let ((version "0.0.0")
         (commit "a58020d2e15d599625b5a41580ca2f609d967421")
-        (package-revision "1"))
+        (package-revision "2"))
     (package
      (name "marginPhase")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))

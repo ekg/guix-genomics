@@ -14,9 +14,9 @@
   #:use-module (gnu packages compression))
 
 (define-public vt
-  (let ((version "v0.57721")
+  (let ((version "0.57721")
         (commit "88da43649b5a39ddfc00d8a8f4d494fad50d5eec")
-        (package-revision "1"))
+        (package-revision "2"))
     (package
      (name "vt")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))

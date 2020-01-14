@@ -12,9 +12,9 @@
   #:use-module (gnu packages compression))
 
 (define-public gimbricate
-  (let ((version "v0.1.0")
+  (let ((version "0.1.0")
         (commit "849a7fb1360e7b1e09d361d65f3f9f1316f33875")
-        (package-revision "1"))
+        (package-revision "2"))
     (package
      (name "gimbricate")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
