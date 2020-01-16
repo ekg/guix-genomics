@@ -13,7 +13,7 @@
 
 (define-public seqwish
   (let ((version "0.2.0")
-        (commit "209d0bcb419049f7adddb2e976d52b20d6e17605")
+        (commit "3287e4e86352caa69aaa4e86f9219319eb89c168")
         (package-revision "2"))
     (package
      (name "seqwish")
