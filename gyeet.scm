@@ -16,7 +16,7 @@
 
 (define-public gyeet
   (let ((version "0.0.0")
-        (commit "ad52f439d55b671dd8e9a783fe6da9118348f0c9")
+        (commit "7965dd0a193ac32aa30e2bb079cee3a2b1a43f3b")
         (package-revision "1"))
     (package
      (name "gyeet")
@@ -30,7 +30,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1035lax7kamhp7mwh50rws7xfhwpb9j49w37y9s9wqqyq47j8nj6"))))
+                "1kygg3j733ys1i3rabvmdqxjxiq2qakxfgpz3q9j9gwni4893307"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
