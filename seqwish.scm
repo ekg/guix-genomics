@@ -13,7 +13,7 @@
 
 (define-public seqwish
   (let ((version "0.5.0")
-        (commit "94bae67522e2eadf742d14a7280821075cd6e90c")
+        (commit "a08e2513e64e5057b157f77a10e90d5f6ae1e6f2")
         (package-revision "1"))
     (package
      (name "seqwish")
@@ -27,7 +27,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0gvljyi3b2pqz82avpmdiawmdg2mrcj0ib0afws4hi3wp6zra7b2"))))
+                "1ar3k0faj54018yg659ivw3m86qga3vb4y8fiq21asw059qihqwc"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
