@@ -15,8 +15,8 @@
   #:use-module (gnu packages compression))
 
 (define-public odgi
-  (let ((version "0.1.0")
-        (commit "bb718c45eef4bd4c2e2d7a031ad60b8d65ed1163")
+  (let ((version "0.4.0")
+        (commit "965174be736e76b6ab6b687925cefced1cb79f02")
         (package-revision "1"))
     (package
      (name "odgi")
@@ -30,7 +30,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "13hp85812izyinac2fbziwrrb0xxjid82hvf68np10zhgaxp761h"))))
+                "0rxz2kalzw6na7q6afv90djk0y3gdp1n406fm13vjsv7n0v2pd6k"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
