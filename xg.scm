@@ -1,4 +1,4 @@
-(define-module (odgi)
+(define-module (xg)
   #:use-module (guix packages)
   #:use-module (guix git-download)
   #:use-module (guix build-system cmake)
@@ -14,23 +14,23 @@
   #:use-module (gnu packages bash)
   #:use-module (gnu packages compression))
 
-(define-public odgi
-  (let ((version "0.4.1")
-        (commit "e6c702c607ff839c1f228d4940a26869d804f92a")
+(define-public xg
+  (let ((version "0.1.0")
+        (commit "915afe6d012a87557c7b2ce9c436bc0f13ac7990")
         (package-revision "1"))
     (package
-     (name "odgi")
+     (name "xg")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
      (source (origin
               (method git-fetch)
               (uri (git-reference
-                    (url "https://github.com/vgteam/odgi.git")
+                    (url "https://github.com/vgteam/xg.git")
                     (commit commit)
                     (recursive? #t)))
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0q01jy5aax16x05dfi6sqdvnzhpspym8rwp8yvqymlbha3by23p6"))))
+                "0rm3x4dclq7fq1qajy4a8nq028bia2viqylq5kjgnrfjckwwb13r"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -42,14 +42,13 @@
       `(("cmake" ,cmake)
         ("glibc" ,glibc)
         ("gcc" ,gcc-9)
-        ("python" ,python)
-        ("pybind11" ,pybind11)
         ("zlib" ,zlib)))
-     (synopsis "odgi optimized dynamic sequence graph implementation")
+     (synopsis "succinct static genome variation graph index")
      (description
-"odgi provides an efficient, succinct dynamic DNA sequence graph model, as well
-as a host of algorithms that allow the use of such graphs in bioinformatic
-analyses.")
-     (home-page "https://github.com/vgteam/odgi")
+"The XG index is a succinct, static index for genome variation graphs.
+This utility reads GFA and writes XG format version of the graph. It
+may also be used to annotate the nodes of graphs in GFA with path
+positions.")
+     (home-page "https://github.com/vgteam/xg")
      (license license:expat))))
 
