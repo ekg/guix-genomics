@@ -16,7 +16,7 @@
 
 (define-public xg
   (let ((version "0.1.0")
-        (commit "915afe6d012a87557c7b2ce9c436bc0f13ac7990")
+        (commit "1828931b8e9f2f6eecdd3ab9920c5b01f026ba2e")
         (package-revision "1"))
     (package
      (name "xg")
@@ -30,7 +30,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0rm3x4dclq7fq1qajy4a8nq028bia2viqylq5kjgnrfjckwwb13r"))))
+                "0gg099bafnjw6bdv83lh00hvls8xb6xivcwm2ax71vxvn6k1gqdv"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
