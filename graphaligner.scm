@@ -18,8 +18,8 @@
   #:use-module (gnu packages protobuf))
 
 (define-public graphaligner
-  (let ((version "1.0.10")
-        (commit "d709c45c192ca3dcf5e1fa15e89bedab8e300de7")
+  (let ((version "1.0.11")
+        (commit "7644b5dd19788501e7de855b8eb9fd5f52e1359c")
         (package-revision "1"))
     (package
      (name "graphaligner")
@@ -33,7 +33,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "04vj4k2ic8s3n14p11y5sg2xndgf214ml97nls0mis4pnmp14397"))))
+                "09dx41dljxsx1qav768hc4ccwa0c9rkgcd7wbdy0prfbhvpc5way"))))
      (build-system gnu-build-system)
      (arguments
       `(#:tests? #f ; no tests
