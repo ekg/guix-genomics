@@ -23,7 +23,7 @@
 
 (define-public shasta
   (let ((version "0.4.0")
-        (commit "14afbe47e2ff0bab722de49765c097f20cae9c46")
+        (commit "a00663c18f2c43942d18ee72319ef219619b3afb")
         (package-revision "1"))
     (package
      (name "shasta")
@@ -37,7 +37,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0sp0dz2g01xz69dj3yavsqs3l7drfij70gizpavspgq4plv30j15"))
+                "0pr87n389awacfw71qs09srhbpm74hy1nh5g72f6wsvfxwls9kgr"))
               (patches (search-patches "shasta-make-install-target-configurable.patch"))))
      (build-system cmake-build-system)
      (arguments
