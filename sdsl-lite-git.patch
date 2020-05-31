@@ -1,0 +1,63 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 657949f..fcedbee 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -44,7 +44,7 @@ else()
+ endif()
+ 
+ if( CMAKE_COMPILER_IS_GNUCXX )
+-    append_cxx_compiler_flags("-std=c++11 -Wall -Wextra -DNDEBUG" "GCC" CMAKE_CXX_FLAGS)
++    append_cxx_compiler_flags("-std=c++11 -D_GLIBCXX_USE_C99_STDLIB -Wall -Wextra -DNDEBUG" "GCC" CMAKE_CXX_FLAGS)
+     append_cxx_compiler_flags("-O3 -ffast-math -funroll-loops" "GCC" CMAKE_CXX_OPT_FLAGS)
+     if ( CODE_COVERAGE )
+         append_cxx_compiler_flags("-g -fprofile-arcs -ftest-coverage -lgcov" "GCC" CMAKE_CXX_FLAGS)
+@@ -118,7 +118,6 @@ else()
+     message(WARNING "git not found. Cloning of submodules will not work.")
+ endif()
+ 
+-add_subdirectory(external)
+ add_subdirectory(include)
+ add_subdirectory(lib)
+ 
+diff --git a/include/sdsl/CMakeLists.txt b/include/sdsl/CMakeLists.txt
+index ef921f0..525aff4 100644
+--- a/include/sdsl/CMakeLists.txt
++++ b/include/sdsl/CMakeLists.txt
+@@ -11,7 +11,7 @@ file(GLOB hppFiles RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_
+ 
+ foreach(hppFile ${hppFiles}) # copy each file
+ 	configure_file( "${CMAKE_CURRENT_SOURCE_DIR}/${hppFile}" "${CMAKE_CURRENT_BINARY_DIR}/${hppFile}" COPYONLY ) 
+-	install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${hppFile}" DESTINATION include/sdsl)
++  install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${hppFile}" DESTINATION "include")
+ #	MESSAGE(${hppFile})
+ endforeach(hppFile)
+ 
+diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
+index b2e606e..ea78ba9 100644
+--- a/lib/CMakeLists.txt
++++ b/lib/CMakeLists.txt
+@@ -1,6 +1,5 @@
+ include_directories(#"${CMAKE_CURRENT_SOURCE_DIR}/../include"
+         "${CMAKE_CURRENT_BINARY_DIR}/../include"
+-        "${CMAKE_CURRENT_BINARY_DIR}/../external/libdivsufsort/include"
+         )
+ 
+ 
+@@ -11,12 +10,14 @@ endif()
+ 
+ set( sdsl_SRCS ${libFiles} ${headerFiles})
+ 
+-add_library( sdsl ${sdsl_SRCS} )
++add_library( sdsl_static ${sdsl_SRCS} )
++add_library( sdsl SHARED ${sdsl_SRCS} )
++
+ 
+ install(TARGETS sdsl
+         RUNTIME DESTINATION bin
+-        LIBRARY DESTINATION lib
+-        ARCHIVE DESTINATION lib)
++        LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
++        ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+         
+ math(EXPR SOVERSION "${LIBRARY_VERSION_MAJOR}+1")
+ 
