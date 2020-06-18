@@ -13,7 +13,7 @@
 
 (define-public seqwish
   (let ((version "0.6.0")
-        (commit "3680d31cc5548f4dc877863c9d0e7d77493b1d67")
+        (commit "920abf0bff9ab6287383aec19e3ea5c0e00bb399")
         (package-revision "1"))
     (package
      (name "seqwish")
@@ -27,7 +27,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1g3k0bbdfnbap2xw27js2yc2xqs96vxarmmg2hv0zx62hfjkz7lx"))))
+                "13jwjszlimf3b4p86rzmgni9pmsk2nwnji9wnrh1zdcplpgd5d2q"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -35,8 +35,7 @@
          %standard-phases
          (delete 'check))))
      (native-inputs
-      `(("gcc" ,gcc-9)
-        ("cmake" ,cmake)
+      `(("cmake" ,cmake)
         ("zlib" ,zlib)))
      (synopsis "variation graph inducer")
      (description

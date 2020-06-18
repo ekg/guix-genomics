@@ -15,8 +15,8 @@
   #:use-module (gnu packages compression))
 
 (define-public odgi
-  (let ((version "0.4.1")
-        (commit "f2c1c8bf3b26163a5858459fb2c74ae43b450df7")
+  (let ((version "0.4.1-path-sgd")
+        (commit "2740e08ea40abe10d8c33dc6dbed005197a6d0c3")
         (package-revision "1"))
     (package
      (name "odgi")
@@ -30,7 +30,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1wfvz60zqsn0pvxp57hys29165ifk89bp0f5cx3n9j6qzn40facj"))))
+                "0s0kvlj7smlc3c7b7wl9zjn7pvryflb4zxm5divckdda7xpyz6m7"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -40,8 +40,6 @@
         #:make-flags (list "CC=gcc")))
      (native-inputs
       `(("cmake" ,cmake)
-        ("glibc" ,glibc)
-        ("gcc" ,gcc-9)
         ("python" ,python)
         ("pybind11" ,pybind11)
         ("zlib" ,zlib)))
