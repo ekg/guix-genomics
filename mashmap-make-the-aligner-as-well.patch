@@ -1,0 +1,37 @@
+From 0a50082e59a74f74a0a95de0d80b2cd9a023a203 Mon Sep 17 00:00:00 2001
+From: Erik Garrison <erik.garrison@gmail.com>
+Date: Thu, 18 Jun 2020 23:18:31 +0200
+Subject: [PATCH] make the aligner as well
+
+---
+ Makefile.in | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile.in b/Makefile.in
+index 3e36139..375a240 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -13,7 +13,7 @@ endif
+ SOURCE_1=src/map/mash_map.cpp
+ SOURCE_2=src/align/align.cpp
+ 
+-all : mashmap 
++all : mashmap mashmap-align
+ 
+ mashmap : 
+ 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(SOURCE_1) -o mashmap @mathlib@ -lstdc++ -lz -lm -lpthread 
+@@ -21,9 +21,9 @@ mashmap :
+ mashmap-align : 
+ 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(SOURCE_2) -o mashmap-align @mathlib@ -lstdc++ -lz -lm -lpthread 
+ 
+-install : mashmap
++install : mashmap mashmap-align
+ 	mkdir -p @prefix@/bin/
+-	cp `pwd`/mashmap @prefix@/bin/
++	cp `pwd`/mashmap `pwd`/mashmap-align @prefix@/bin/
+ 
+ clean :
+ 	-rm -f mashmap
+-- 
+2.25.1
+
