@@ -18,22 +18,22 @@
 
 (define-public mashmap
   (let ((version "2.0")
-        (commit "53e8865bbc6d8d2c05c100a31b5c3960b366b4fc")
-        (package-revision "2"))
+        (commit "a4633ff755f158272761be650c88f5d8b9f0708d")
+        (package-revision "1"))
     (package
      (name "mashmap")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
      (source (origin
               (method git-fetch)
               (uri (git-reference
-                    (url "https://github.com/marbl/MashMap.git")
+                    (url "https://github.com/ekg/MashMap.git")
                     (commit commit)
                     (recursive? #f)))
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0jcdi8czb0xc47753z23nrdzrwa8w40kf0gfsv2fs53k9phrc7pv"))
-              (patches (search-patches "mashmap-make-the-aligner-as-well.patch"))))
+                "01ijrrmm8ksblngp7y7n13pd7q3ahssq1v9waianmqg8acwn5dxh"))))
+     ;(patches (search-patches "mashmap-make-the-aligner-as-well.patch"))))
      (build-system gnu-build-system)
      (arguments
       `(#:make-flags 
