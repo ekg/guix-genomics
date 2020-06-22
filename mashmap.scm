@@ -18,7 +18,7 @@
 
 (define-public mashmap
   (let ((version "2.0")
-        (commit "a4633ff755f158272761be650c88f5d8b9f0708d")
+        (commit "fa92bd7cfbfc2d39c61ca7200a360a27c298d135")
         (package-revision "1"))
     (package
      (name "mashmap")
@@ -32,7 +32,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "01ijrrmm8ksblngp7y7n13pd7q3ahssq1v9waianmqg8acwn5dxh"))))
+                "1fnk0rs2z4bmp0s1dwnqppbnkk5nxs5xn0jyl7ad9xqxhspl0qpy"))))
      ;(patches (search-patches "mashmap-make-the-aligner-as-well.patch"))))
      (build-system gnu-build-system)
      (arguments
