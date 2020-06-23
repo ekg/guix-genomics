@@ -15,8 +15,8 @@
   #:use-module (gnu packages compression))
 
 (define-public odgi
-  (let ((version "0.4.1-path-sgd")
-        (commit "2740e08ea40abe10d8c33dc6dbed005197a6d0c3")
+  (let ((version "0.4.1")
+        (commit "f1757207afe3af6bc9b9657fe20d3be5b149d066")
         (package-revision "1"))
     (package
      (name "odgi")
@@ -30,12 +30,19 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0s0kvlj7smlc3c7b7wl9zjn7pvryflb4zxm5divckdda7xpyz6m7"))))
+                "0i8y9jl94d28bhkyp5nmyc358r8g17il5g536vdspbrarkxsqndj"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
         (modify-phases
          %standard-phases
+         ;; This stashes our build version in the executable
+         (add-after 'unpack 'set-version
+                    (lambda _
+                      (system "mkdir -p include")
+                      (system "echo '#define ODGI_GIT_VERSION \"$GIT_VERSION\"' > include/odgi_git_version.hpp")
+                      (substitute* "include/odgi_git_version.hpp" (("unknown") ,version))
+                      #t))
          (delete 'check))
         #:make-flags (list "CC=gcc")))
      (native-inputs
