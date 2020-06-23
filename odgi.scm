@@ -17,7 +17,7 @@
 (define-public odgi
   (let ((version "0.4.1")
         (commit "f1757207afe3af6bc9b9657fe20d3be5b149d066")
-        (package-revision "1"))
+        (package-revision "2"))
     (package
      (name "odgi")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -40,7 +40,7 @@
          (add-after 'unpack 'set-version
                     (lambda _
                       (system "mkdir -p include")
-                      (system "echo '#define ODGI_GIT_VERSION \"$GIT_VERSION\"' > include/odgi_git_version.hpp")
+                      (system "echo '#define ODGI_GIT_VERSION \"unknown\"' > include/odgi_git_version.hpp")
                       (substitute* "include/odgi_git_version.hpp" (("unknown") ,version))
                       #t))
          (delete 'check))
