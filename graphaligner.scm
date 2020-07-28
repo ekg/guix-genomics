@@ -19,7 +19,7 @@
 
 (define-public graphaligner
   (let ((version "1.0.11")
-        (commit "7644b5dd19788501e7de855b8eb9fd5f52e1359c")
+        (commit "856d30c927e3b7fdafbd4d278b5a06466ae5de46")
         (package-revision "1"))
     (package
      (name "graphaligner")
@@ -33,7 +33,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "09dx41dljxsx1qav768hc4ccwa0c9rkgcd7wbdy0prfbhvpc5way"))))
+                "174qibvjghbgbmz4la5spmnmj08mly9canspnsbhwqynd35sbpg7"))))
      (build-system gnu-build-system)
      (arguments
       `(#:tests? #f ; no tests
@@ -47,6 +47,11 @@
                                (substitute* "makefile"
                                             (("VERSION .*") (string-append "VERSION = " ,version "\n"))))
                              #t))
+         ;(add-after 'unpack 'kill-jemalloc
+         ;           (lambda* (#:key inputs #:allow-other-keys)
+         ;             (substitute* "makefile"
+         ;                          (("$(JEMALLOCFLAGS) ") ""))
+         ;           #t))
          (delete 'configure) ; no configure phase
          (replace 'install
                   (lambda* (#:key outputs #:allow-other-keys)
