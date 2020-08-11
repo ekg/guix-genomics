@@ -3,16 +3,8 @@
   #:use-module (guix git-download)
   #:use-module (guix build-system cmake)
   #:use-module ((guix licenses) #:prefix license:)
-  #:use-module (gnu packages base)
-  #:use-module (gnu packages gcc)
-  #:use-module (gnu packages cmake)
-  #:use-module (gnu packages version-control)
-  #:use-module (gnu packages python)
-  #:use-module (gnu packages python-xyz)
-  #:use-module (gnu packages wget)
-  #:use-module (gnu packages curl)
-  #:use-module (gnu packages bash)
-  #:use-module (gnu packages compression))
+  #:use-module (guix utils)
+  #:use-module (gnu packages python))
 
 (define-public odgi
   (let ((version "0.4.1")
@@ -38,18 +30,16 @@
          %standard-phases
          ;; This stashes our build version in the executable
          (add-after 'unpack 'set-version
-                    (lambda _
-                      (system "mkdir -p include")
-                      (system "echo '#define ODGI_GIT_VERSION \"unknown\"' > include/odgi_git_version.hpp")
-                      (substitute* "include/odgi_git_version.hpp" (("unknown") ,version))
-                      #t))
+           (lambda _
+             (mkdir "include")
+             (with-output-to-file "include/odgi_git_version.hpp"
+               (lambda ()
+                 (format #t "#define ODGI_GIT_VERSION \"~a\"~%" version)))
+             #t))
          (delete 'check))
-        #:make-flags (list "CC=gcc")))
+        #:make-flags (list ,(string-append "CC=" (cc-for-target)))))
      (native-inputs
-      `(("cmake" ,cmake)
-        ("python" ,python)
-        ("pybind11" ,pybind11)
-        ("zlib" ,zlib)))
+      `(("python" ,python)))
      (synopsis "odgi optimized dynamic sequence graph implementation")
      (description
 "odgi provides an efficient, succinct dynamic DNA sequence graph model, as well
