@@ -14,12 +14,13 @@
   #:use-module (gnu packages jemalloc)
   #:use-module (gnu packages maths)
   #:use-module (gnu packages perl)
+  #:use-module (gnu packages jemalloc)
   #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages protobuf))
 
 (define-public graphaligner
   (let ((version "1.0.11")
-        (commit "856d30c927e3b7fdafbd4d278b5a06466ae5de46")
+        (commit "b9695bba1670cd72b7e97ce659a9add915e6738d")
         (package-revision "1"))
     (package
      (name "graphaligner")
@@ -33,7 +34,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "174qibvjghbgbmz4la5spmnmj08mly9canspnsbhwqynd35sbpg7"))))
+                "19g85xcxr0n0fvhhs9nmx5ac6kp37962g3klsgqg6hg1xfljzglb"))))
      (build-system gnu-build-system)
      (arguments
       `(#:tests? #f ; no tests
@@ -73,7 +74,7 @@
         ("zlib" ,zlib "static")))
      (inputs
       `(("boost" ,boost-static)
-        ("jemalloc" ,jemalloc)
+        ("jemalloc@4.5.0" ,jemalloc-4.5.0)
         ("libdivsufsort" ,libdivsufsort)
         ("mummer" ,mummer)
         ("protobuf" ,protobuf)
