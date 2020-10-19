@@ -17,8 +17,8 @@
   #:use-module (gnu packages compression))
 
 (define-public wfmash
-  (let ((version "1.0")
-        (commit "8f827e824016757842d33034c9364598976cede0")
+  (let ((version "0.2")
+        (commit "00b3a7354f39c4262d392a289aac7fdd18270ab2")
         (package-revision "1"))
     (package
      (name "wfmash")
@@ -32,7 +32,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0hknm4xb1g2fayf4n10ab7wjqsgmf8f3xdm4g27p96kz2gbbly3x"))))
+                "1d8lh53132pmaf438ydjsilda8gp16b4rapbr2c5l8sp9kamq7i7"))))
      ;(patches (search-patches "mashmap-make-the-aligner-as-well.patch"))))
      (build-system gnu-build-system)
      (arguments
