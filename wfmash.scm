@@ -18,7 +18,7 @@
 
 (define-public wfmash
   (let ((version "0.2")
-        (commit "7b5ebf91ccab96667c4ee73f7faf9de87f87c409")
+        (commit "5c6ae5d37f82f7e5a96e7d1c4d56cfc0124c9477")
         (package-revision "1"))
     (package
      (name "wfmash")

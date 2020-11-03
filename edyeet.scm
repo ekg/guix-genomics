@@ -18,7 +18,7 @@
 
 (define-public edyeet
   (let ((version "v0.1")
-        (commit "63663eb033e67accb01e75c9bdd18ab3e0cd3cc6")
+        (commit "1a172f63f38a49b8e180a63d7684551337a4f724")
         (package-revision "1"))
     (package
      (name "edyeet")
@@ -32,7 +32,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1h5rfq1pq21c4hc8bbzhbrmd3shnsigxk0ngsp0y0dp2x5701kwm"))))
+                "0razsq6w90sm7k0yvfpfjhw6dh7byd16icpcj5550rlc7b0z35wx"))))
      ;(patches (search-patches "mashmap-make-the-aligner-as-well.patch"))))
      (build-system gnu-build-system)
      (arguments
