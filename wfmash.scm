@@ -32,7 +32,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0vqx1j9f8409zgsvysr6mqdjxv248w2yh2p7v4d3crblrli8jnf7"))))
+                "1n84k1a8hzcrk02nyx2dh2wamanhcrs74g6ibm0yqfwm0qslsj23"))))
      ;(patches (search-patches "mashmap-make-the-aligner-as-well.patch"))))
      (build-system gnu-build-system)
      (arguments
