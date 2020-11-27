@@ -17,8 +17,8 @@
   #:use-module (gnu packages compression))
 
 (define-public edyeet
-  (let ((version "0.2.1")
-        (commit "057b141b38db1868a24f87c1a4204ed62a5f2ba2")
+  (let ((version "0.2.2")
+        (commit "90e1c1ed6b88330fd3e3ba50aabb5d78c11ff472")
         (package-revision "1"))
     (package
      (name "edyeet")
@@ -32,7 +32,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1kv6v4ipvma40iqcclx1p9a3ayd7339p4yhxsyjj03i93kp9bw9p"))))
+                "176xc3ay9dyhb7iqnbnpwqabni6gppkgmp3j1vr7fjmq1m6i4kva"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
