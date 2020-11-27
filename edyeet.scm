@@ -17,7 +17,7 @@
   #:use-module (gnu packages compression))
 
 (define-public edyeet
-  (let ((version "v0.2")
+  (let ((version "0.2.0")
         (commit "bcf5f1d1f3b8bdbd29327de1b4dfe6b50ce352c3")
         (package-revision "1"))
     (package
