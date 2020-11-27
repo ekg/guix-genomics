@@ -1,7 +1,7 @@
 (define-module (edyeet)
   #:use-module (guix packages)
   #:use-module (guix git-download)
-  #:use-module (guix build-system gnu)
+  #:use-module (guix build-system cmake)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
   #:use-module (gnu packages base)
@@ -17,8 +17,8 @@
   #:use-module (gnu packages compression))
 
 (define-public edyeet
-  (let ((version "v0.1")
-        (commit "1a172f63f38a49b8e180a63d7684551337a4f724")
+  (let ((version "v0.2")
+        (commit "bcf5f1d1f3b8bdbd29327de1b4dfe6b50ce352c3")
         (package-revision "1"))
     (package
      (name "edyeet")
@@ -32,19 +32,18 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0razsq6w90sm7k0yvfpfjhw6dh7byd16icpcj5550rlc7b0z35wx"))))
-     ;(patches (search-patches "mashmap-make-the-aligner-as-well.patch"))))
-     (build-system gnu-build-system)
+                "1j9fw0fpq3xh1rl9lz0lw9nb4v139ry18sfxxla084y298wi736f"))))
+     (build-system cmake-build-system)
      (arguments
-      `(#:make-flags 
-        '("CC=gcc" "CXX=g++")
-        #:phases
+      `(#:phases
         (modify-phases
          %standard-phases
-         (delete 'check))))
+         (delete 'check))
+        #:configure-flags '("-DBUILD_TESTING=false")
+        #:make-flags (list "CC=gcc CXX=g++")))
      (native-inputs
-      `(("gsl" ,gsl)
-        ("autoconf" ,autoconf)
+      `(("cmake" ,cmake)
+        ("gsl" ,gsl)
         ("zlib" ,zlib)))
      (synopsis "base-accurate DNA sequence alignments using edlib and mashmap2")
      (description "edyeet is a fork of MashMap that implements
