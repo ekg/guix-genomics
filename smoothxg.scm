@@ -17,7 +17,7 @@
 (define-public smoothxg
   (let ((version "0.2.0")
         (commit "38c185b3d6283b1505ca6571dd2f37311ed7c552")
-        (package-revision "2"))
+        (package-revision "3"))
     (package
      (name "smoothxg")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -42,7 +42,7 @@
       `(("cmake" ,cmake)
         ("python" ,python)
         ("pybind11" ,pybind11)
-        ("gcc" ,gcc-9)
+        ("gcc" ,gcc-10)
         ("zlib" ,zlib)))
      (synopsis "linearize and simplify variation graphs using blocked partial order alignment")
      (description
