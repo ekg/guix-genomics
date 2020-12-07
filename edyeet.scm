@@ -18,8 +18,8 @@
 
 (define-public edyeet
   (let ((version "0.2.2")
-        (commit "90e1c1ed6b88330fd3e3ba50aabb5d78c11ff472")
-        (package-revision "2"))
+        (commit "f14cd0383a22f8ca44f50b279e143392e2541dca")
+        (package-revision "3"))
     (package
      (name "edyeet")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -32,7 +32,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "176xc3ay9dyhb7iqnbnpwqabni6gppkgmp3j1vr7fjmq1m6i4kva"))))
+                "1983iv3viv0fsn05i21zsygrfl0mg1f5z3w06v2rmzdfliz82x0w"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -44,7 +44,7 @@
      (native-inputs
       `(("cmake" ,cmake)
         ("gsl" ,gsl)
-        ("gcc" ,gcc-9)
+        ("gcc" ,gcc-10)
         ("zlib" ,zlib)))
      (synopsis "base-accurate DNA sequence alignments using edlib and mashmap2")
      (description "edyeet is a fork of MashMap that implements
