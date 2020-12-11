@@ -18,7 +18,7 @@
 
 (define-public edyeet
   (let ((version "0.2.2")
-        (commit "2e11675a8d6811445e63221ff2fe714797f856ef")
+        (commit "47a1b0709b7bd0adcf744f42b3dc387a756e32d9")
         (package-revision "4"))
     (package
      (name "edyeet")
@@ -32,7 +32,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1r4p25bzz2hx6jpw9k0cacsp9cls29vw7c7vw3m8syix320bqx5g"))))
+                "1b30n376r1663yknb7bdziirj4xcbiyflbhmbvaidwh18c73lc29"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
