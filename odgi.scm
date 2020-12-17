@@ -4,11 +4,12 @@
   #:use-module (guix build-system cmake)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix utils)
+  #:use-module (gnu packages gcc)
   #:use-module (gnu packages python))
 
 (define-public odgi
-  (let ((version "0.4.1")
-        (commit "ed210de339686f04b901afe6bab98121b586fd01")
+  (let ((version "0.5.0")
+        (commit "a33c73ae1cab05e2d6fd395e73bd6a8f65a99ea2")
         (package-revision "1"))
     (package
      (name "odgi")
@@ -22,7 +23,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0i801r60qmlj4lqgwjirjyz05qj1yqa4cwwp7sk0xgr4aqh9dbhf"))))
+                "01s83cmj847m5jbya83wsmz9fifhw6jd8yylr1irmml0ph5z4pzd"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -39,7 +40,8 @@
          (delete 'check))
         #:make-flags (list ,(string-append "CC=" (cc-for-target)))))
      (native-inputs
-      `(("python" ,python)))
+      `(("python" ,python)
+        ("gcc" ,gcc-10)))
      (synopsis "odgi optimized dynamic sequence graph implementation")
      (description
 "odgi provides an efficient, succinct dynamic DNA sequence graph model, as well
