@@ -15,9 +15,9 @@
   #:use-module (gnu packages compression))
 
 (define-public smoothxg
-  (let ((version "0.2.0")
-        (commit "c2b04370373a212fd59b10bdc05caa7b7b1bef70")
-        (package-revision "4"))
+  (let ((version "0.3.0-alpha")
+        (commit "aeb79b69e166742c4d3badfbd454c76dcadaedc7")
+        (package-revision "1"))
     (package
      (name "smoothxg")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -30,7 +30,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "11cc3lxs54mlncbk6r424vppikqgph99kmvz8kk2hb18dx0s66xd"))))
+                "1s107l7blslmz7bffrzrs2d8dma28n9l9hmqnvl7mn6cyvrkmc23"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
