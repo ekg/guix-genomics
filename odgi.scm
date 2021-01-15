@@ -8,8 +8,8 @@
   #:use-module (gnu packages python))
 
 (define-public odgi
-  (let ((version "0.5.0")
-        (commit "a33c73ae1cab05e2d6fd395e73bd6a8f65a99ea2")
+  (let ((version "0.5.1")
+        (commit "4e646d3dec925c12ea029c9561ba60b5f952dcfc")
         (package-revision "1"))
     (package
      (name "odgi")
@@ -23,7 +23,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "01s83cmj847m5jbya83wsmz9fifhw6jd8yylr1irmml0ph5z4pzd"))))
+                "0inla5imvvy3xz53nn6kxlkrf2gqsrcwp1i769gvh77a28fhjlib"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
