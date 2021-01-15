@@ -1,7 +1,7 @@
 (define-module (wfmash)
   #:use-module (guix packages)
   #:use-module (guix git-download)
-  #:use-module (guix build-system gnu)
+  #:use-module (guix build-system cmake)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
   #:use-module (gnu packages base)
@@ -17,8 +17,8 @@
   #:use-module (gnu packages compression))
 
 (define-public wfmash
-  (let ((version "0.2")
-        (commit "5c6ae5d37f82f7e5a96e7d1c4d56cfc0124c9477")
+  (let ((version "0.3.1")
+        (commit "8ff9d7dcae19bb0d48578bd92589dc5e405d0d37")
         (package-revision "1"))
     (package
      (name "wfmash")
@@ -32,19 +32,19 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1n84k1a8hzcrk02nyx2dh2wamanhcrs74g6ibm0yqfwm0qslsj23"))))
-     ;(patches (search-patches "mashmap-make-the-aligner-as-well.patch"))))
-     (build-system gnu-build-system)
+                "1f577xw6vsf9ld9qq5xqbp3j4mxfw38bg9lq3dyfdk7apgy7xn1n"))))
+     (build-system cmake-build-system)
      (arguments
-      `(#:make-flags 
-        '("CC=gcc" "CXX=g++")
-        #:phases
+      `(#:phases
         (modify-phases
          %standard-phases
-         (delete 'check))))
+         (delete 'check))
+        ;;#:configure-flags '("-DBUILD_TESTING=false")
+        #:make-flags (list "CC=gcc CXX=g++")))
      (native-inputs
-      `(("gsl" ,gsl)
-        ("autoconf" ,autoconf)
+      `(("cmake" ,cmake)
+        ("gsl" ,gsl)
+        ("gcc" ,gcc-10)
         ("zlib" ,zlib)))
      (synopsis "base-accurate DNA sequence alignments using WFA and mashmap2")
      (description "wfmash is a fork of MashMap that implements
