@@ -32,7 +32,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1zm4drdmm7i8791qi49npckahbfzci2czamnk9ldzqciyvn8zb7b"))))
+                "0pxpfjplf78l1nv73lnfbz78rshwbjv4cadd8aazgw1cxhwzb7a6"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
