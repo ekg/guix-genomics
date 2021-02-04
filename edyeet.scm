@@ -18,8 +18,8 @@
 
 (define-public edyeet
   (let ((version "0.3.0")
-        (commit "5e1f752db87dd46dc1f649fe063a2a927a91e435")
-        (package-revision "1"))
+        (commit "776a0c82e7ebf9ea7def055d12e19d6bb0aa5383")
+        (package-revision "2"))
     (package
      (name "edyeet")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
