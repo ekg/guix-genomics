@@ -16,8 +16,8 @@
 
 (define-public smoothxg
   (let ((version "0.4.0")
-        (commit "74c6a52979551e5b60fc9b3b50387ffc87826841")
-        (package-revision "6"))
+        (commit "279f76feb30824a3239bda2b75b2581ae48f685b")
+        (package-revision "7"))
     (package
      (name "smoothxg")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
