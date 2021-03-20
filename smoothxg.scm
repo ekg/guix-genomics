@@ -16,8 +16,8 @@
 
 (define-public smoothxg
   (let ((version "0.4.0")
-        (commit "22b793f91106b57fc97af6fbddc366f8a84ae77c")
-        (package-revision "17"))
+        (commit "4e8db7933db3e9cbf975653d97d17c75753ef77c")
+        (package-revision "19"))
     (package
      (name "smoothxg")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -30,7 +30,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1npj6105rmbwwgrm093h5bl46ycgzs6gy5nbdx62d532igm69hzp"))))
+                "0v9ajcd91yd4am9a8va08pa5h3lnbq8n15dph5pqkg3adq9kywnf"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -43,6 +43,7 @@
         ("python" ,python)
         ("pybind11" ,pybind11)
         ("gcc" ,gcc-10)
+        ("zstd" ,zstd "lib")
         ("zlib" ,zlib)))
      (synopsis "linearize and simplify variation graphs using blocked partial order alignment")
      (description
