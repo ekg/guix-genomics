@@ -13,8 +13,8 @@
 
 (define-public seqwish
   (let ((version "0.7.0")
-        (commit "9eb09823b6e7f4c72dac7b2a08faa3d80c2e3d79")
-        (package-revision "4"))
+        (commit "3b8d6c295b2fa3704aa020190fb695e88d8f4dfd")
+        (package-revision "5"))
     (package
      (name "seqwish")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
