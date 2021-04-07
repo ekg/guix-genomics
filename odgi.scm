@@ -9,8 +9,8 @@
 
 (define-public odgi
   (let ((version "0.5.1")
-        (commit "65f9cfdb22d0c61e491876c7aa7ef91664750d91")
-        (package-revision "11"))
+        (commit "89118ff15039a4cd572412e39d1de83ee25b9dd7")
+        (package-revision "12"))
     (package
      (name "odgi")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -23,7 +23,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1pak7d1wscmhmh6lq9giy2k3jr28f93l17x1c1fknpqmcrairkcg"))))
+                "1qjj3a96wx4q5d1rm7yl5pcjjrj2ql256n43l7v6468fq88c9rms"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
