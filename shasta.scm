@@ -5,84 +5,85 @@
   #:use-module (guix build-system cmake)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
-  #:use-module (gnu packages base)
-  #:use-module (gnu packages gcc)
-  #:use-module (gnu packages cmake)
   #:use-module (gnu packages autotools)
-  #:use-module (gnu packages python)
-  #:use-module (gnu packages python-xyz)
-  #:use-module (gnu packages check)
-  #:use-module (gnu packages curl)
-  #:use-module (gnu packages bash)
-  #:use-module (gnu packages compression)
+  #:use-module (gnu packages bioinformatics)
   #:use-module (gnu packages boost)
-  #:use-module (gnu packages image)
+  #:use-module (gnu packages check)
+  #:use-module (gnu packages compression)
+  #:use-module (gnu packages curl)
   #:use-module (gnu packages graphviz)
-  #:use-module (gnu packages bioinformatics))
+  #:use-module (gnu packages image)
+  #:use-module (gnu packages python)
+  #:use-module (gnu packages python-xyz))
 
 
 (define-public shasta
-  (let ((version "0.4.0")
-        (commit "a00663c18f2c43942d18ee72319ef219619b3afb")
-        (package-revision "1"))
-    (package
-     (name "shasta")
-     (version (string-append version "+" (string-take commit 7) "-" package-revision))
-     (source (origin
+  (package
+    (name "shasta")
+    (version "0.7.0")
+    (source (origin
               (method git-fetch)
               (uri (git-reference
-                    (url "https://github.com/chanzuckerberg/shasta.git")
-                    (commit commit)
-                    (recursive? #f)))
+                     (url "https://github.com/chanzuckerberg/shasta")
+                     (commit version)))
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0pr87n389awacfw71qs09srhbpm74hy1nh5g72f6wsvfxwls9kgr"))
+                "0nqzgmk6p15ir207v0rkxmzrjv97frjwpnqis40qjx1z9w9188ry"))
               (patches (search-patches "shasta-make-install-target-configurable.patch"))))
-     (build-system cmake-build-system)
-     (arguments
-      `(#:configure-flags
-        (list "-DBUILD_STATIC_EXECUTABLE=0"
-              "-DBUILD_STATIC_LIBRARY=0"
-              "-DBUILD_APPIMAGE=0"
-              (string-append "-DCMAKE_INSTALL_RPATH=" (assoc-ref %outputs "out") "/lib"))
-        #:phases
-        (modify-phases %standard-phases
-          (add-after 'unpack 'fix-pybind11
-            (lambda _
-              (substitute* "dynamicLibrary/CMakeLists.txt"
-                (("python3 -m pybind11 --includes") "python3-config --includes")
-                (("/usr/bin/python3-config") "python3-config"))
-              #t))
-          (add-after 'unpack 'fix-rpath
-            (lambda _
-              (substitute* "dynamicExecutable/CMakeLists.txt"
-                (("set_target_properties\\(shastaDynamicExecutable PROPERTIES INSTALL_RPATH.*$") ""))
-              #t))
-          (delete 'check)
-          (add-after 'install 'provide-libboost_python
-            (lambda* (#:key outputs #:allow-other-keys)
-              (let ((out (assoc-ref %outputs "out")))
-                (with-directory-excursion (string-append out "/bin")
-                  (symlink "shastaDynamic" "shasta"))
-                #t)))
-          )))
-     (native-inputs
-      `(("gcc" ,gcc-9)
-        ("cmake" ,cmake)
-        ("python" ,python)
-        ("pybind11" ,pybind11)
-        ("boost" ,boost)
-        ("blast+" ,blast+)
-        ("seqan" ,seqan)
-        ("libpng" ,libpng)
-        ("graphviz" ,graphviz)
-        ("spoa" ,spoa)
-        ("marginPhase" ,marginPhase)
-        ("zlib" ,zlib)))
-     (synopsis "de novo assembler for Oxford Nanopore reads")
-     (description
-"The goal of the Shasta long read assembler is to rapidly produce
+    (build-system cmake-build-system)
+    (arguments
+     `(#:configure-flags
+       (list "-DBUILD_STATIC_EXECUTABLE=OFF"
+             "-DBUILD_STATIC_LIBRARY=OFF"
+             "-DBUILD_NATIVE=OFF"
+             (string-append "-DBUILD_ID=\"Shasta Release " ,version "\""))
+       #:phases
+       (modify-phases %standard-phases
+         (add-after 'unpack 'fix-pybind11
+           (lambda _
+             (substitute* "dynamicLibrary/CMakeLists.txt"
+               (("python3 -m pybind11 --includes") "python3-config --includes")
+               (("/usr/bin/python3-config") "python3-config"))
+             #t))
+         (add-after 'unpack 'prepare-for-tests
+           (lambda _
+             (rename-file "tests/TinyTest.fasta.gz" "../TinyTest.fasta.gz")
+             #t))
+         (add-after 'unpack 'fix-rpath
+           (lambda _
+             (substitute* "dynamicExecutable/CMakeLists.txt"
+               (("set_target_properties\\(shastaDynamicExecutable PROPERTIES INSTALL_RPATH.*$") ""))
+             #t))
+         (add-after 'install 'create-symlink
+           (lambda* (#:key outputs #:allow-other-keys)
+             (let ((out (assoc-ref %outputs "out")))
+               (with-directory-excursion (string-append out "/bin")
+                 (symlink "shastaDynamic" "shasta"))
+               #t)))
+         (replace 'check
+           (lambda* (#:key tests? #:allow-other-keys)
+             (when tests?
+               (invoke "gunzip" "../TinyTest.fasta.gz")
+               (invoke "dynamicExecutable/shastaDynamic"
+                       "--Align.alignMethod" "3"
+                       "--input" "../TinyTest.fasta"))
+             #t)))))
+    (inputs
+     `(("boost" ,boost)
+       ("libpng" ,libpng)
+       ("python" ,python)
+       ("spoa" ,spoa)
+       ("zlib" ,zlib)))
+    (native-inputs
+     `(("blast+" ,blast+)
+       ("graphviz" ,graphviz)
+       ("marginPhase" ,marginPhase)
+       ("pybind11" ,pybind11)
+       ("seqan" ,seqan)       ))
+    (synopsis "De novo assembly from Oxford Nanopore reads")
+    (description
+     "The goal of the Shasta long read assembler is to rapidly produce
 accurate assembled sequence using as input DNA reads generated by
 Oxford Nanopore flow cells.  Computational methods used by the Shasta
 assembler include: Using a run-length representation of the read
@@ -91,49 +92,51 @@ homopolymer repeat counts, which are the most common type of errors in
 Oxford Nanopore reads.  Using in some phases of the computation a
 representation of the read sequence based on markers, a fixed subset
 of short k-mers (k ≈ 10).")
-     (home-page "https://chanzuckerberg.github.io/shasta")
-     (license license:expat))))
+    (home-page "https://chanzuckerberg.github.io/shasta")
+    (license license:expat)))
 
 (define-public spoa
-  (let ((version "3.0.1")
-        (commit "9dbcd7aa223c1e7fa789530c39fcd143d3886d3b")
-        (package-revision "4"))
-    (package
-     (name "spoa")
-     (version (string-append version "+" (string-take commit 7) "-" package-revision))
-     (source (origin
+  (package
+    (name "spoa")
+    (version "3.4.0")   ; This version for shasta-0.7.0.
+    (source (origin
               (method git-fetch)
               (uri (git-reference
-                    (url "https://github.com/rvaser/spoa.git")
-                    (commit commit)
-                    (recursive? #f)))
+                     (url "https://github.com/rvaser/spoa")
+                     (commit version)
+                     (recursive? #t)))
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0g1hdps18gjdwizxvnqz6hk7fm9f624hzyaxb5jqvil5913n2w9v"))))
-     (build-system cmake-build-system)
-     (arguments
-      `(#:configure-flags
-        (list "-DCMAKE_CXX_FLAGS=-O3 -fPIC"
-              "-DCMAKE_C_FLAGS=-O3 -fPIC")
-        #:phases
-        (modify-phases
-         %standard-phases
-         (delete 'check))))
-     (native-inputs
-      `(("gcc" ,gcc-9)
-        ("cmake" ,cmake)))
-     (synopsis "c++ implementation of the partial order alignment (POA) algorithm")
-     (description
-"Spoa (SIMD POA) is a c++ implementation of the partial order alignment (POA)
-algorithm (as described in 10.1093/bioinformatics/18.3.452) which is used to
-generate consensus sequences (as described in 10.1093/bioinformatics/btg109). It
-supports three alignment modes: local (Smith-Waterman), global
-(Needleman-Wunsch) and semi-global alignment (overlap), and three gap modes:
-linear, affine and convex (piecewise affine). It supports Intel SSE4.1+ and AVX2
-vectorization (marginally faster due to high latency shifts).")
-     (home-page "https://github.com/rvaser/spoa.git")
-     (license license:expat))))
+                "177n64d92hwjqisvpb1s4v3kbqni7wlbw2l16wgddhi0hd25lqkf"))))
+    (build-system cmake-build-system)
+    (arguments
+     `(#:configure-flags
+       (list "-DCMAKE_CXX_FLAGS=-O3 -fPIC"
+             "-DCMAKE_C_FLAGS=-O3 -fPIC"
+             "-DBUILD_SHARED_LIBS=ON"
+             "-Dspoa_generate_dispatch=ON"
+             "-Dspoa_optimize_for_native=ON"
+             "-Dspoa_build_tests=ON")
+       #:phases
+       (modify-phases %standard-phases
+         (replace 'check
+           (lambda* (#:key tests? #:allow-other-keys)
+             (when tests?
+               (invoke "./bin/spoa_test"))
+             #t)))))
+    (synopsis "SIMD partial order alignment tool/library")
+    (description
+     "@acronym{Spoa, SIMD POA} is a c++ implementation of the @acronym{partial
+order alignment, POA} algorithm (as described in
+10.1093/bioinformatics/18.3.452) which is used to generate consensus sequences
+(as described in 10.1093/bioinformatics/btg109).  It supports three alignment
+modes: local (Smith-Waterman), global (Needleman-Wunsch) and semi-global
+alignment (overlap), and three gap modes: linear, affine and convex (piecewise
+affine).  It supports Intel SSE4.1+ and AVX2 vectorization (marginally faster
+due to high latency shifts).")
+    (home-page "https://github.com/rvaser/spoa.git")
+    (license license:expat)))
 
 (define-public marginPhase
   (let ((version "0.0.0")
@@ -154,30 +157,25 @@ vectorization (marginally faster due to high latency shifts).")
                 "0w0hgz49jak4v2gaypqs1ydxa7mgqa07yvanqk4pgn80lzdhih0p"))))
      (build-system cmake-build-system)
      (arguments
-      `(#:configure-flags
+      `(#:tests? #f     ; no tests
+        #:configure-flags
         (list "-DCMAKE_CXX_FLAGS=-O3 -fPIC"
               "-DCMAKE_C_FLAGS=-O3 -fPIC")
         #:phases
-        (modify-phases
-            %standard-phases
+        (modify-phases %standard-phases
           (add-after 'unpack 'kill-htslib
             (lambda _
               (substitute* "CMakeLists.txt"
                 (("COMMAND autoheader")
-                 (string-append "COMMAND autoheader && sed -i 's%/bin/sh%" (which "sh") "%' ./configure")))
-              #t))
-          (delete 'check))))
+                 (string-append "COMMAND autoheader && sed -i 's%/bin/sh%"
+                                (which "sh") "%' ./configure")))
+              #t)))))
      (native-inputs
-      `(("gcc" ,gcc-9)
-        ("cmake" ,cmake)
-        ("bash" ,bash)
-        ("sed" ,sed)
+      `(("autoconf" ,autoconf)
         ("curl" ,curl)
-        ("autoconf" ,autoconf)
         ("htslib" ,htslib)
         ("zlib" ,zlib)))
      (synopsis "simultaneous haplotyping and genotyping")
-     (description
-"MarginPhase combines haplotyping and genotyping.")
+     (description "MarginPhase combines haplotyping and genotyping.")
      (home-page "https://github.com/rvaser/spoa.git")
      (license license:expat))))

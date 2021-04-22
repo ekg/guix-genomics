@@ -1,22 +1,8 @@
-From 846cf5d13bcb19483f79cb1367d6f92af70fea7b Mon Sep 17 00:00:00 2001
-From: Erik Garrison <erik.garrison@gmail.com>
-Date: Wed, 8 Jan 2020 17:39:31 +0100
-Subject: [PATCH] make install target configurable
-
----
- CMakeLists.txt                     | 11 ++++-------
- dynamicExecutable/CMakeLists.txt   |  4 ++--
- dynamicLibrary/CMakeLists.txt      |  2 +-
- staticExecutable/CMakeLists.txt    |  2 +-
- staticExecutableGpu/CMakeLists.txt |  2 +-
- staticLibrary/CMakeLists.txt       |  2 +-
- 6 files changed, 10 insertions(+), 13 deletions(-)
-
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 7eed971..376a4a8 100644
+index 288833f..6e1a449 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -127,21 +127,18 @@ endif(BUILD_DYNAMIC_EXECUTABLE)
+@@ -117,18 +117,15 @@ endif(BUILD_DYNAMIC_EXECUTABLE)
  
  
  
@@ -36,17 +22,13 @@ index 7eed971..376a4a8 100644
 -install(DIRECTORY docs DESTINATION shasta-install)
 +install(DIRECTORY docs DESTINATION share/shasta)
  
- # Install the docker directory.
--install(DIRECTORY docker DESTINATION shasta-install)
-+install(DIRECTORY docker DESTINATION share/shasta)
- 
  # The targets built in each subdirectory are
  # installed by the cmake file of each subdirectory.
 diff --git a/dynamicExecutable/CMakeLists.txt b/dynamicExecutable/CMakeLists.txt
-index 56f4b0c..46ecfc5 100644
+index f3ecb18..0afb7dd 100644
 --- a/dynamicExecutable/CMakeLists.txt
 +++ b/dynamicExecutable/CMakeLists.txt
-@@ -71,10 +71,10 @@ if(BUILD_DEBUG)
+@@ -80,10 +80,10 @@ if(BUILD_DEBUG)
  endif(BUILD_DEBUG)
  
  # Install the dynamic executable into the bin directory.
@@ -60,55 +42,46 @@ index 56f4b0c..46ecfc5 100644
  endif(BUILD_APPIMAGE)
  
 diff --git a/dynamicLibrary/CMakeLists.txt b/dynamicLibrary/CMakeLists.txt
-index d7023b3..555bc2e 100644
+index c143d07..fc0b141 100644
 --- a/dynamicLibrary/CMakeLists.txt
 +++ b/dynamicLibrary/CMakeLists.txt
-@@ -95,7 +95,7 @@ else(BUILD_FOR_GPU)
- endif(BUILD_FOR_GPU)
+@@ -88,8 +88,8 @@ target_link_libraries(
+     shastaDynamicLibrary 
+      atomic png boost_program_options pthread z spoa ${SHASTA_PYTHON_LIBRARIES})
  
- # Install the shared library into the bin directory.
+-# Install the shared library into the bin directory.
 -install(TARGETS shastaDynamicLibrary DESTINATION shasta-install/bin)
++# Install the shared library into the lib directory.
 +install(TARGETS shastaDynamicLibrary DESTINATION lib)
  
  
  
 diff --git a/staticExecutable/CMakeLists.txt b/staticExecutable/CMakeLists.txt
-index df439d5..0d0a8f1 100644
+index e811e82..46c0653 100644
 --- a/staticExecutable/CMakeLists.txt
 +++ b/staticExecutable/CMakeLists.txt
-@@ -89,6 +89,6 @@ if(NOT MACOS)
+@@ -101,7 +101,7 @@ if(NOT MACOS)
+     SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -static-libstdc++ -static-libgcc")
  endif(NOT MACOS)
  
- # The static executable goes to the bin directory.
+-# The static executable goes to the bin directory.
 -install(TARGETS shastaStaticExecutable DESTINATION shasta-install/bin)
++# The static executable goes to the lib directory.
 +install(TARGETS shastaStaticExecutable DESTINATION bin)
  
  
-diff --git a/staticExecutableGpu/CMakeLists.txt b/staticExecutableGpu/CMakeLists.txt
-index f21eee5..92ef0db 100644
---- a/staticExecutableGpu/CMakeLists.txt
-+++ b/staticExecutableGpu/CMakeLists.txt
-@@ -74,6 +74,6 @@ target_link_libraries(shastaGpu
-     -Wl,--whole-archive -lpthread -Wl,--no-whole-archive)
- 
- # The static executable goes to the bin directory.
--install(TARGETS shastaGpu DESTINATION shasta-install/bin)
-+install(TARGETS shastaGpu DESTINATION bin)
- 
- 
 diff --git a/staticLibrary/CMakeLists.txt b/staticLibrary/CMakeLists.txt
-index f7208e4..685e904 100644
+index 004bc3e..e88389b 100644
 --- a/staticLibrary/CMakeLists.txt
 +++ b/staticLibrary/CMakeLists.txt
-@@ -63,7 +63,7 @@ set_target_properties(shastaStaticLibrary PROPERTIES PREFIX "")
+@@ -66,8 +66,8 @@ set_target_properties(shastaStaticLibrary PROPERTIES OUTPUT_NAME "shasta")
+ set_target_properties(shastaStaticLibrary PROPERTIES PREFIX "")
  set_target_properties(shastaStaticLibrary PROPERTIES DEFINE_SYMBOL "")
  
- # Install the static library into the bin directory.
+-# Install the static library into the bin directory.
 -install(TARGETS shastaStaticLibrary DESTINATION shasta-install/bin)
++# Install the static library into the lib directory.
 +install(TARGETS shastaStaticLibrary DESTINATION lib)
  
  
  
--- 
-2.24.0
-
