@@ -17,9 +17,9 @@
   #:use-module (gnu packages compression))
 
 (define-public wfmash
-  (let ((version "0.3.1")
-        (commit "60b09cb593036697bd6691be12428b1cfb9282da")
-        (package-revision "19"))
+  (let ((version "0.4.0")
+        (commit "1e105861ebac6f62ecde4611acbfc334780acf60")
+        (package-revision "20"))
     (package
      (name "wfmash")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -32,7 +32,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0s733zqiqnhx4qy5fxgs6cnid26gj6xca27bfb4zpf77klwr58sb"))))
+                "0vycm6lm8w9xdwjipcaf23kn5f05i3hij5n7j0ngpb4w5fsdpp69"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
