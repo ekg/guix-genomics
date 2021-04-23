@@ -7,6 +7,7 @@
   #:use-module (gnu packages gcc)
   #:use-module (gnu packages cmake)
   #:use-module (gnu packages version-control)
+  #:use-module (gnu packages jemalloc)
   #:use-module (gnu packages python)
   #:use-module (gnu packages python-xyz)
   #:use-module (gnu packages wget)
@@ -16,8 +17,8 @@
 
 (define-public smoothxg
   (let ((version "0.4.0")
-        (commit "c2402d3af39c89442807d5b710d4245deb793a2e")
-        (package-revision "35"))
+        (commit "dc937afdea3535ce84ac9812ead75d1afd993280")
+        (package-revision "36"))
     (package
      (name "smoothxg")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -30,7 +31,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1m2j5qrm2qifrrbv1f7qayfr9rl56ch2j4fldf6vkzv8s6bf08cg"))))
+                "0pcfmjxhifgkc68vljn62m89hkbxq3nxrp14fz3432k1bjzkxv1k"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -43,6 +44,7 @@
         ("python" ,python)
         ("pybind11" ,pybind11)
         ("gcc" ,gcc-10)
+        ("jemalloc" ,jemalloc)
         ("zstd" ,zstd "lib")
         ("zlib" ,zlib)))
      (synopsis "linearize and simplify variation graphs using blocked partial order alignment")
