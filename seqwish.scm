@@ -8,13 +8,14 @@
   #:use-module (gnu packages cmake)
   #:use-module (gnu packages python)
   #:use-module (gnu packages wget)
+  #:use-module (gnu packages jemalloc)
   #:use-module (gnu packages bash)
   #:use-module (gnu packages compression))
 
 (define-public seqwish
   (let ((version "0.7.0")
-        (commit "3b8d6c295b2fa3704aa020190fb695e88d8f4dfd")
-        (package-revision "5"))
+        (commit "f39f8753754bec5dca4900ccf2b6e5fd72120564")
+        (package-revision "6"))
     (package
      (name "seqwish")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -27,7 +28,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "06hihjg096fkbaxmn74r6vgxyfwws4vvrjs9n5jvk8n5xsk1lsmj"))))
+                "1m8mvxysqhcvv1mc65n34y7rxc7gyx96rrf35rwfyapc34c151zr"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -36,6 +37,7 @@
          (delete 'check))))
      (native-inputs
       `(("cmake" ,cmake)
+        ("jemalloc" ,jemalloc)
         ("zlib" ,zlib)))
      (synopsis "variation graph inducer")
      (description
