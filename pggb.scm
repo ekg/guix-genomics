@@ -8,12 +8,13 @@
   #:use-module (odgi)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
-  #:use-module (gnu packages compression))
+  #:use-module (gnu packages compression)
+  #:use-module (gnu packages time))
 
 (define-public pggb
   (let ((version "0.1.0")
-        (commit "4eb6ba9aae1062594a234581ba81dedafdedc521")
-        (package-revision "1"))
+        (commit "d1d909debdba6ed79ee09272617fbb3300f36255")
+        (package-revision "2"))
     (package
      (name "pggb")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -26,7 +27,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0v1zljnfgij1aiysg4hv8009g6qzz3kx6i29j4l29rky9x1bk9jk"))))
+                "1xfapi2cpxk1jk122jbgzasnxnb2l6x2ypaa2qbk66irlp318xv4"))))
      (build-system copy-build-system)
      (arguments
       '(#:install-plan
@@ -36,6 +37,7 @@
         ("seqwish" ,seqwish)
         ("smoothxg" ,smoothxg)
         ("odgi" ,odgi)
+        ("time" ,time)
         ("pigz" ,pigz)))
      (synopsis "the pangenome graph builder")
      (description "This pangenome graph construction pipeline renders
