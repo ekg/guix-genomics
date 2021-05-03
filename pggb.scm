@@ -1,9 +1,14 @@
 (define-module (pggb)
   #:use-module (guix packages)
   #:use-module (guix git-download)
-  #:use-module (guix build-system cmake)
+  #:use-module (guix build-system copy)
+  #:use-module (wfmash)
+  #:use-module (seqwish)
+  #:use-module (smoothxg)
+  #:use-module (odgi)
   #:use-module ((guix licenses) #:prefix license:)
-  #:use-module (gnu packages))
+  #:use-module (gnu packages)
+  #:use-module (gnu packages compression))
 
 (define-public pggb
   (let ((version "0.1.0")
@@ -21,7 +26,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0izip35a0xd8r018p1smfxpiwlhpva1aqqfi23xwck854xgibw4n"))))
+                "0v1zljnfgij1aiysg4hv8009g6qzz3kx6i29j4l29rky9x1bk9jk"))))
      (build-system copy-build-system)
      (arguments
       '(#:install-plan
@@ -32,7 +37,7 @@
         ("smoothxg" ,smoothxg)
         ("odgi" ,odgi)
         ("pigz" ,pigz)))
-     (synopsis "the pangenome graph builder"
+     (synopsis "the pangenome graph builder")
      (description "This pangenome graph construction pipeline renders
 a collection of sequences into a pangenome graph (in the variation
 graph model).  Its goal is to build a graph that is locally directed
