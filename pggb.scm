@@ -8,13 +8,14 @@
   #:use-module (odgi)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
+  #:use-module (gnu packages algebra)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages time))
 
 (define-public pggb
   (let ((version "0.1.0")
         (commit "dc6c775209dd09dba536b120dd4cb77849820cf5")
-        (package-revision "3"))
+        (package-revision "4"))
     (package
      (name "pggb")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -38,6 +39,7 @@
         ("smoothxg" ,smoothxg)
         ("odgi" ,odgi)
         ("time" ,time)
+        ("bc" ,bc)
         ("pigz" ,pigz)))
      (synopsis "the pangenome graph builder")
      (description "This pangenome graph construction pipeline renders
