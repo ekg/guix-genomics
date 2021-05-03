@@ -3,7 +3,8 @@
   #:use-module (guix git-download)
   #:use-module (guix build-system copy)
   #:use-module ((guix licenses) #:prefix license:)
-  #:use-module (gnu packages))
+  #:use-module (gnu packages)
+  #:use-module (gnu packages maths))
 
 (define-public paf2dot
   (let ((version "0.0.0")
@@ -21,7 +22,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1xfapi2cpxk1jk122jbgzasnxnb2l6x2ypaa2qbk66irlp318xv4"))))
+                "0zr5jv4wjy35bk97hrcvwvi94d4cnvh5mr5230nz56ni6dgz02ic"))))
      (build-system copy-build-system)
      (arguments
       '(#:install-plan
