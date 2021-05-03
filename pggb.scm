@@ -1,4 +1,4 @@
-(define-module (wfmash)
+(define-module (pggb)
   #:use-module (guix packages)
   #:use-module (guix git-download)
   #:use-module (guix build-system cmake)
@@ -7,7 +7,7 @@
 
 (define-public pggb
   (let ((version "0.1.0")
-        (commit "8c915ee4f1c1917de31b4221752be58c00ff0a76")
+        (commit "4eb6ba9aae1062594a234581ba81dedafdedc521")
         (package-revision "1"))
     (package
      (name "pggb")
@@ -26,6 +26,12 @@
      (arguments
       '(#:install-plan
         '(("pggb" "bin/"))))
+     (inputs
+      `(("wfmash" ,wfmash)
+        ("seqwish" ,seqwish)
+        ("smoothxg" ,smoothxg)
+        ("odgi" ,odgi)
+        ("pigz" ,pigz)))
      (synopsis "the pangenome graph builder"
      (description "This pangenome graph construction pipeline renders
 a collection of sequences into a pangenome graph (in the variation
