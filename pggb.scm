@@ -15,8 +15,8 @@
 
 (define-public pggb
   (let ((version "0.1.0")
-        (commit "9209280731a543d3847390ef5614319328a0c56b")
-        (package-revision "6"))
+        (commit "930e9ba4bd4405ebe21b9160666afe3702e47737")
+        (package-revision "7"))
     (package
      (name "pggb")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -29,7 +29,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "16in4f86vlqi7nazddz57wms8y6ynhpb3vyn408q0z39nag4c3nc"))))
+                "0jcrmir4yrqajwd8zh5pvndgr544l5gih84pv4cmxn790lp0n0mr"))))
      (build-system copy-build-system)
      (arguments
       '(#:install-plan
