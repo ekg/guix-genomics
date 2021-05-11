@@ -1,21 +1,14 @@
 (define-module (wfmash)
+  #:use-module (guix utils)
   #:use-module (guix packages)
   #:use-module (guix git-download)
   #:use-module (guix build-system cmake)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
-  #:use-module (gnu packages base)
-  #:use-module (gnu packages crypto)
+  #:use-module (gnu packages compression)
   #:use-module (gnu packages gcc)
-  #:use-module (gnu packages cmake)
-  #:use-module (gnu packages tls)
-  #:use-module (gnu packages python)
   #:use-module (gnu packages jemalloc)
-  #:use-module (gnu packages curl)
-  #:use-module (gnu packages bash)
-  #:use-module (gnu packages maths)
-  #:use-module (gnu packages autotools)
-  #:use-module (gnu packages compression))
+  #:use-module (gnu packages maths))
 
 (define-public wfmash
   (let ((version "0.4.0")
@@ -36,16 +29,13 @@
                 "0a67360v1ybqmk6fyz018654si20mp1k0zjcss4fj2vcb3vjbicm"))))
      (build-system cmake-build-system)
      (arguments
-      `(#:phases
-        (modify-phases
-         %standard-phases
-         (delete 'check))
+      `(#:tests? #f
         ;;#:configure-flags '("-DBUILD_TESTING=false")
-        #:make-flags (list "CC=gcc CXX=g++")))
-     (native-inputs
-      `(("cmake" ,cmake)
+        #:make-flags (list (string-append "CC=" ,(cc-for-target))
+                           (string-append "CXX=" ,(cxx-for-target)))))
+     (inputs
+      `(("gcc" ,gcc-10)
         ("gsl" ,gsl)
-        ("gcc" ,gcc-10)
         ("jemalloc" ,jemalloc)
         ("zlib" ,zlib)))
      (synopsis "base-accurate DNA sequence alignments using WFA and mashmap2")

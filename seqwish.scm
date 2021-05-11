@@ -3,13 +3,7 @@
   #:use-module (guix git-download)
   #:use-module (guix build-system cmake)
   #:use-module ((guix licenses) #:prefix license:)
-  #:use-module (gnu packages base)
-  #:use-module (gnu packages gcc)
-  #:use-module (gnu packages cmake)
-  #:use-module (gnu packages python)
-  #:use-module (gnu packages wget)
   #:use-module (gnu packages jemalloc)
-  #:use-module (gnu packages bash)
   #:use-module (gnu packages compression))
 
 (define-public seqwish
@@ -31,13 +25,9 @@
                 "1m8mvxysqhcvv1mc65n34y7rxc7gyx96rrf35rwfyapc34c151zr"))))
      (build-system cmake-build-system)
      (arguments
-      `(#:phases
-        (modify-phases
-         %standard-phases
-         (delete 'check))))
-     (native-inputs
-      `(("cmake" ,cmake)
-        ("jemalloc" ,jemalloc)
+      `(#:tests? #f))
+     (inputs
+      `(("jemalloc" ,jemalloc)
         ("zlib" ,zlib)))
      (synopsis "variation graph inducer")
      (description
