@@ -1,19 +1,15 @@
 (define-module (smoothxg)
+  #:use-module (guix utils)
   #:use-module (guix packages)
   #:use-module (guix git-download)
   #:use-module (guix build-system cmake)
   #:use-module ((guix licenses) #:prefix license:)
-  #:use-module (gnu packages base)
+  #:use-module (gnu packages compression)
   #:use-module (gnu packages gcc)
-  #:use-module (gnu packages cmake)
-  #:use-module (gnu packages version-control)
   #:use-module (gnu packages jemalloc)
   #:use-module (gnu packages python)
   #:use-module (gnu packages python-xyz)
-  #:use-module (gnu packages wget)
-  #:use-module (gnu packages curl)
-  #:use-module (gnu packages bash)
-  #:use-module (gnu packages compression))
+  #:use-module (gnu packages version-control))
 
 (define-public smoothxg
   (let ((version "0.4.0")
@@ -34,19 +30,16 @@
                 "1xql93amlwz0acn3dbim834a1vpq7ddfy7893fv9k3cwi15z48l3"))))
      (build-system cmake-build-system)
      (arguments
-      `(#:phases
-        (modify-phases
-         %standard-phases
-         (delete 'check))
-        #:make-flags (list "CC=gcc")))
+      `(#:tests? #f
+        #:make-flags (list (string-append "CC=" ,(cc-for-target)))))
      (native-inputs
-      `(("cmake" ,cmake)
-        ("python" ,python)
-        ("pybind11" ,pybind11)
-        ("gcc" ,gcc-10)
+      `(("pybind11" ,pybind11)
+        ("python" ,python)))
+     (inputs
+      `(("gcc" ,gcc-10)
         ("jemalloc" ,jemalloc)
-        ("zstd" ,zstd "lib")
-        ("zlib" ,zlib)))
+        ("zlib" ,zlib)
+        ("zstd" ,zstd "lib")))
      (synopsis "linearize and simplify variation graphs using blocked partial order alignment")
      (description
 "Pangenome graphs built from raw sets of alignments may have complex
