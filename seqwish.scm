@@ -4,12 +4,13 @@
   #:use-module (guix build-system cmake)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages jemalloc)
+  #:use-module (gnu packages gcc)
   #:use-module (gnu packages compression))
 
 (define-public seqwish
   (let ((version "0.7.1")
         (commit "6da2102b2fdcfe95d92e9648fd0ee3cc46f8f8ce")
-        (package-revision "2"))
+        (package-revision "3"))
     (package
      (name "seqwish")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
