@@ -9,9 +9,9 @@
   #:use-module (gnu packages python))
 
 (define-public odgi
-  (let ((version "0.5.1")
-        (commit "eedbc8b9c1a955eac34a55190c03865c282e6f76")
-        (package-revision "28"))
+  (let ((version "0.6.0")
+        (commit "84de3765719ef5e7c513846c61dd886c30c5d010")
+        (package-revision "1"))
     (package
      (name "odgi")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -24,7 +24,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1wxrsiinbbqqis412g4zw88pvavxl4glx6fh4i0db2q96g9i0wkm"))))
+                "05wf694qjnckaq05hq9dlldxh25wvww4b1inhml6h1dh8pdb4k9l"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -43,7 +43,7 @@
      (native-inputs
       `(("python" ,python)
         ("jemalloc" ,jemalloc)
-        ("gcc" ,gcc-10)))
+        ("gcc" ,gcc-11)))
      (synopsis "odgi optimized dynamic sequence graph implementation")
      (description
 "odgi provides an efficient, succinct dynamic DNA sequence graph model, as well
