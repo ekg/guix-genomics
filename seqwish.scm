@@ -8,8 +8,8 @@
 
 (define-public seqwish
   (let ((version "0.7.1")
-        (commit "d29ea5713cc525d04402beac2876144e71587679")
-        (package-revision "1"))
+        (commit "6da2102b2fdcfe95d92e9648fd0ee3cc46f8f8ce")
+        (package-revision "2"))
     (package
      (name "seqwish")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -22,12 +22,13 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1kychn00rbwyz8phprx0szc3xc9gf5lihbqn0h1gylhlacxkcyr8"))))
+                "010a6y7qnzn1nqwnl4jwc6r6gj7gr41c6n5hg9wdliahpmi9wms5"))))
      (build-system cmake-build-system)
      (arguments
       `(#:tests? #f))
      (inputs
       `(("jemalloc" ,jemalloc)
+        ("gcc" ,gcc-11)
         ("zlib" ,zlib)))
      (synopsis "variation graph inducer")
      (description
