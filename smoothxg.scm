@@ -13,8 +13,8 @@
 
 (define-public smoothxg
   (let ((version "0.5.1")
-        (commit "a58f34b9e16206c4b487979cd5c7084be885ef71")
-        (package-revision "2"))
+        (commit "9ad1d769b8ba87ed11c26d3f4606c3620b215778")
+        (package-revision "3"))
     (package
      (name "smoothxg")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -27,7 +27,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0z86xy5k8z5vhsqrsbqxm78c9kcmfkjic864rxzg3k9iym4avs5q"))))
+                "1a7sx5n66mcizd10j2n2gg1v8k3h7j83lbak95yg476b9j8hfzhr"))))
      (build-system cmake-build-system)
      (arguments
       `(#:tests? #f
@@ -36,7 +36,7 @@
       `(("pybind11" ,pybind11)
         ("python" ,python)))
      (inputs
-      `(("gcc" ,gcc-10)
+      `(("gcc" ,gcc-11)
         ("jemalloc" ,jemalloc)
         ("zlib" ,zlib)
         ("zstd" ,zstd "lib")))
