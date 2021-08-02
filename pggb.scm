@@ -7,6 +7,7 @@
   #:use-module (smoothxg)
   #:use-module (odgi)
   #:use-module ((guix licenses) #:prefix license:)
+  #:use-module (gn packages bioinformatics)
   #:use-module (gnu packages)
   #:use-module (gnu packages algebra)
   #:use-module (gnu packages bash)
@@ -15,9 +16,9 @@
   #:use-module (gnu packages time))
 
 (define-public pggb
-  (let ((version "0.1.1")
-        (commit "13416994da7496ce8fe40e941f6de6c9d2e866b7")
-        (package-revision "4"))
+  (let ((version "0.1.2")
+        (commit "5fdb10261b78156852b4c7f8dce34c449b72b704")
+        (package-revision "1"))
     (package
      (name "pggb")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -29,7 +30,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0zkl33diasxgxzz8x9npk1dhyghblbwzvwfvm4f333ih0n4q9jf4"))))
+                "0qq4b6xczr1s33q5n485qf62afm5dmpnn4d2m2x95glvrvcdg9fn"))))
      (build-system trivial-build-system)
      (arguments
       `(#:modules ((guix build utils))
@@ -62,6 +63,7 @@
         ("seqwish" ,seqwish)
         ("smoothxg" ,smoothxg)
         ("time" ,time)
+        ("gfaffix" ,gfaffix)
         ("wfmash" ,wfmash)))
      (synopsis "Pangenome graph builder")
      (description "This pangenome graph construction pipeline renders
