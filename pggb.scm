@@ -18,7 +18,7 @@
 (define-public pggb
   (let ((version "0.1.2")
         (commit "5fdb10261b78156852b4c7f8dce34c449b72b704")
-        (package-revision "1"))
+        (package-revision "2"))
     (package
      (name "pggb")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -52,6 +52,7 @@
                                    ,(string-append (assoc-ref %build-inputs "seqwish") "/bin")
                                    ,(string-append (assoc-ref %build-inputs "smoothxg") "/bin")
                                    ,(string-append (assoc-ref %build-inputs "time") "/bin")
+                                   ,(string-append (assoc-ref %build-inputs "gfaffix") "/bin")
                                    ,(string-append (assoc-ref %build-inputs "wfmash") "/bin"))))
             #t))))
      (inputs
