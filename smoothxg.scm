@@ -13,8 +13,8 @@
 
 (define-public smoothxg
   (let ((version "0.5.1")
-        (commit "5f6e875057b36e734528afede7baf7193906e9ea")
-        (package-revision "3"))
+        (commit "faaac92715d3ea19a862660c3b476ba96c83bc17")
+        (package-revision "4"))
     (package
      (name "smoothxg")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -27,7 +27,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "15xx909dniwr5k96xvvpjxhxiwirq102d6wjkmcdc7y719x0a43w"))))
+                "14xrs37y3xgvxjim8aay37w99s69arym4ij9g1f435g3h1ndja8j"))))
      (build-system cmake-build-system)
      (arguments
       `(#:tests? #f
