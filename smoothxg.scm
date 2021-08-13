@@ -12,9 +12,9 @@
   #:use-module (gnu packages version-control))
 
 (define-public smoothxg
-  (let ((version "0.5.1")
-        (commit "06c47506188dcc0cb3aa50b0eee6887dacffbbf1")
-        (package-revision "5"))
+  (let ((version "0.6.0")
+        (commit "b8da05b05b25814bc86581d9dc7cc8ef5f4de942")
+        (package-revision "1"))
     (package
      (name "smoothxg")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
