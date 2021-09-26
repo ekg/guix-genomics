@@ -13,7 +13,7 @@
 (define-public wfmash
   (let ((version "0.6.0")
         (commit "261bb9a3c56d813f81b92d82183f7e2936c8a016")
-        (package-revision "10"))
+        (package-revision "11"))
     (package
      (name "wfmash")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -36,7 +36,7 @@
      (inputs
       `(("gcc" ,gcc-11)
         ("gsl" ,gsl)
-        ("jemalloc" ,jemalloc)
+        ("jemalloc@4.5.0" ,jemalloc-4.5.0)
         ("zlib" ,zlib)))
      (synopsis "base-accurate DNA sequence alignments using WFA and mashmap2")
      (description "wfmash is a fork of MashMap that implements
