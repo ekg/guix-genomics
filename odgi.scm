@@ -11,7 +11,7 @@
 (define-public odgi
   (let ((version "0.6.2")
         (commit "8900d23e02bcc60cd73f39f3ddabf81c4ecc8ceb")
-        (package-revision "4"))
+        (package-revision "5"))
     (package
      (name "odgi")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -42,7 +42,7 @@
         #:make-flags (list ,(string-append "CC=" (cc-for-target)))))
      (native-inputs
       `(("python" ,python)
-        ("jemalloc" ,jemalloc)
+        ("jemalloc@4.5.0" ,jemalloc-4.5.0)
         ("gcc" ,gcc-11)))
      (synopsis "odgi optimized dynamic sequence graph implementation")
      (description
