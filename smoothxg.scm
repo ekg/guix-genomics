@@ -13,8 +13,8 @@
 
 (define-public smoothxg
   (let ((version "0.6.0")
-        (commit "a952fe07933d657cc070c954fb197c37e68e45e4")
-        (package-revision "2"))
+        (commit "c49986d8fa54a6e2d2f54a86c627363939274cd2")
+        (package-revision "3"))
     (package
      (name "smoothxg")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -27,7 +27,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0kmjjqbbpm8mb1qxlvd0hdx0jxyf97dd4rv3rryhgakrdhl99wi5"))))
+                "11hpihc9xrav0gjcxn0lzv8k0dwmf279f0p3rf43nmprmag383cn"))))
      (build-system cmake-build-system)
      (arguments
       `(#:tests? #f
@@ -37,7 +37,7 @@
         ("python" ,python)))
      (inputs
       `(("gcc" ,gcc-11)
-        ("jemalloc" ,jemalloc)
+        ("jemalloc@4.5.0" ,jemalloc-4.5.0)
         ("zlib" ,zlib)
         ("zstd" ,zstd "lib")))
      (synopsis "linearize and simplify variation graphs using blocked partial order alignment")
