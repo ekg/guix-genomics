@@ -4,12 +4,13 @@
   #:use-module (guix build-system cmake)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages gcc)
+  #:use-module (gnu packages jemalloc)
   #:use-module (gnu packages compression))
 
 (define-public seqwish
   (let ((version "0.7.1")
-        (commit "7025819b5dde752103284e80cdc9b3a80f51a3f0")
-        (package-revision "5"))
+        (commit "2ab95d76094a7386c158a337d38238bbc3de2cef")
+        (package-revision "6"))
     (package
      (name "seqwish")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -22,12 +23,13 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1csr1jh28n5j4rgxgriy4aj5k2kn8vhb2djr8mqcnaf322qmcing"))))
+                "1vgshxln567aai8g64khy3kap8gczmc78c86vbpgpigwyw6gq43c"))))
      (build-system cmake-build-system)
      (arguments
       `(#:tests? #f))
      (inputs
       `(("gcc" ,gcc-11)
+        ("jemalloc" ,jemalloc)
         ("zlib" ,zlib)))
      (synopsis "variation graph inducer")
      (description
