@@ -5,16 +5,12 @@
   #:use-module (guix git-download)
   #:use-module (guix build-system gnu)
   #:use-module ((guix licenses) #:prefix license:)
-  #:use-module (gnu packages base)
-  #:use-module (gnu packages bash)
   #:use-module (gnu packages boost)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages datastructures)
-  #:use-module (gnu packages gcc)
   #:use-module (gnu packages jemalloc)
   #:use-module (gnu packages maths)
   #:use-module (gnu packages perl)
-  #:use-module (gnu packages jemalloc)
   #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages protobuf))
 
@@ -42,42 +38,46 @@
         #:phases
         (modify-phases
          %standard-phases
-         (add-after 'unpack 'patch-source
-                    (lambda* (#:key inputs #:allow-other-keys)
-                             (let ((sdsl (assoc-ref inputs "sdsl-lite")))
-                               (substitute* "makefile"
-                                            (("VERSION .*") (string-append "VERSION = " ,version "\n"))))
-                             #t))
+         (add-after 'unpack 'patch-version
+           (lambda _
+             (substitute* "makefile"
+               (("VERSION .*") (string-append "VERSION = " ,version "\n")))
+             #t))
+         (add-after 'unpack 'no-static-linking
+           (lambda _
+             (substitute* "makefile"
+               (("-Wl,-Bstatic") "")
+               (("-static-libstdc\\+\\+") ""))
+             #t))
          ;(add-after 'unpack 'kill-jemalloc
-         ;           (lambda* (#:key inputs #:allow-other-keys)
-         ;             (substitute* "makefile"
-         ;                          (("$(JEMALLOCFLAGS) ") ""))
-         ;           #t))
+         ;  (lambda* (#:key inputs #:allow-other-keys)
+         ;    (substitute* "makefile"
+         ;      (("$(JEMALLOCFLAGS) ") ""))
+         ;    #t))
          (delete 'configure) ; no configure phase
          (replace 'install
-                  (lambda* (#:key outputs #:allow-other-keys)
-                           (let ((out (assoc-ref outputs "out")))
-                             (for-each
-                              (lambda (program)
-                                (install-file program (string-append out "/bin")))
-                              (find-files "bin" "."))
-                             (for-each
-                              (lambda (header)
-                                (install-file header (string-append out "/include")))
-                              (find-files "src" "\\.h(pp)?$")))
-                           #t)))))
+           (lambda* (#:key outputs #:allow-other-keys)
+             (let ((out (assoc-ref outputs "out")))
+               (for-each
+                 (lambda (program)
+                   (install-file program (string-append out "/bin")))
+                 (find-files "bin"))
+               (for-each
+                 (lambda (header)
+                   (install-file header (string-append out "/include")))
+                 (find-files "src" "\\.h(pp)?$")))
+             #t)))))
      (native-inputs
-      `(("pkg-config" ,pkg-config)
-        ("protobuf" ,protobuf "static")
-        ("sdsl-lite" ,sdsl-lite)
-        ("sparsehash" ,sparsehash)
-        ("zlib" ,zlib "static")))
+      `(("jemalloc@4.5.0:bin" ,jemalloc-4.5.0 "bin")
+        ("pkg-config" ,pkg-config)
+        ("sparsehash" ,sparsehash)))
      (inputs
-      `(("boost" ,boost-static)
+      `(("boost" ,boost)
         ("jemalloc@4.5.0" ,jemalloc-4.5.0)
         ("libdivsufsort" ,libdivsufsort)
         ("mummer" ,mummer)
         ("protobuf" ,protobuf)
+        ("sdsl-lite" ,sdsl-lite)
         ("zlib" ,zlib)))
      (home-page "https://github.com/maickrau/GraphAligner")
      (synopsis "Seed-and-extend program for aligning  genome graphs")
