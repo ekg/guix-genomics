@@ -80,7 +80,7 @@
        ("graphviz" ,graphviz)
        ("marginPhase" ,marginPhase)
        ("pybind11" ,pybind11)
-       ("seqan" ,seqan)       ))
+       ("seqan" ,seqan-2)))
     (synopsis "De novo assembly from Oxford Nanopore reads")
     (description
      "The goal of the Shasta long read assembler is to rapidly produce
