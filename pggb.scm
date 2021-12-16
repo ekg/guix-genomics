@@ -17,8 +17,8 @@
 
 (define-public pggb
   (let ((version "0.2.0")
-        (commit "531f85f2047357f0c45ec7ea1133b40dbbef6023")
-        (package-revision "1"))
+        (commit "640bf6b9f61005e6ae67dc40d052cc3566c8fc62")
+        (package-revision "2"))
     (package
      (name "pggb")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))

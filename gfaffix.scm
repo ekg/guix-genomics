@@ -26,15 +26,14 @@
         (snippet
          '(begin
             (substitute* "Cargo.toml"
-              (("^handlegraph.*") "handlegraph = \"0.7\"\n"))))))
+                         (("^handlegraph.*") "handlegraph = \"0.7\"\n")
+                         ;(("^clap.*") "clap = {version = \"3.0.0-beta.2\", features = [ \"derive\" ] }\n")
+                         )))))
     (build-system cargo-build-system)
     (arguments
-     `(#:rust ,(if (> (string->number (version-major+minor (package-version rust-1.49)))
-                      (string->number (version-major+minor (package-version rust))))
-                 rust-1.49
-                 rust)
-       #:cargo-inputs
+     `(#:cargo-inputs
        (("rust-clap" ,rust-clap-3)
+        ("rust-clap-derive" ,rust-clap-derive-3)
         ("rust-rustc-hash" ,rust-rustc-hash-1)
         ("rust-regex" ,rust-regex-1)
         ("rust-handlegraph" ,rust-handlegraph-0.7)
@@ -73,11 +72,7 @@ collapses them into a non-redundant graph structure.")
          (base32
           "1frlcdwhycjvizb0gfb0v36vxjdi0jxagl2l2v6dzdjxpaawv9rs"))))
     (arguments
-     `(#:rust ,(if (> (string->number (version-major+minor (package-version rust-1.47)))
-                      (string->number (version-major+minor (package-version rust))))
-                 rust-1.47
-                 rust)
-       #:cargo-inputs
+     `(#:cargo-inputs
        (("rust-anyhow" ,rust-anyhow-1)
         ("rust-boomphf" ,rust-boomphf-0.5)
         ("rust-bstr" ,rust-bstr-0.2)
