@@ -11,7 +11,7 @@
 (define-public odgi
   (let ((version "0.6.2")
         (commit "9e9c4811169760f64690e86619dbd1b088ec5955")
-        (package-revision "12"))
+        (package-revision "13"))
     (package
      (name "odgi")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
