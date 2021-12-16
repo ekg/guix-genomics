@@ -8,9 +8,9 @@
   #:use-module (gnu packages compression))
 
 (define-public seqwish
-  (let ((version "0.7.1")
-        (commit "2ab95d76094a7386c158a337d38238bbc3de2cef")
-        (package-revision "6"))
+  (let ((version "0.7.3")
+        (commit "51ee55079ccb89402fdb50999268f3382678b083")
+        (package-revision "1"))
     (package
      (name "seqwish")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -23,10 +23,23 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1vgshxln567aai8g64khy3kap8gczmc78c86vbpgpigwyw6gq43c"))))
+                "0cpq1zgpfsnss0dcq3kg1rjl80nhr8rdpvsl60h0pcxb8wfqq412"))))
      (build-system cmake-build-system)
      (arguments
-      `(#:tests? #f))
+      `(#:tests? #f
+        #:phases
+        (modify-phases
+         %standard-phases
+         ;; This stashes our build version in the executable
+         (add-after 'unpack 'set-version
+           (lambda _
+             (mkdir "include")
+             (with-output-to-file "include/seqwish_git_version.hpp"
+               (lambda ()
+                 (format #t "#define SEQWISH_GIT_VERSION \"~a\"~%" version)))
+             #t))
+         (delete 'check))
+        ))
      (inputs
       `(("gcc" ,gcc-11)
         ("jemalloc" ,jemalloc)

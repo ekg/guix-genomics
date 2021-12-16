@@ -18,7 +18,7 @@
 (define-public pggb
   (let ((version "0.2.0")
         (commit "640bf6b9f61005e6ae67dc40d052cc3566c8fc62")
-        (package-revision "2"))
+        (package-revision "3"))
     (package
      (name "pggb")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -30,7 +30,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0rs4fiq4adk24qa3g6bqn5a9s6vdh404kx4f1abzdm2fa3608j48"))))
+                "1awvhfkaky5h9h083ydpvw5ibymd2b2p7g9c2nbyh0qr3mv3lyj9"))))
      (build-system trivial-build-system)
      (arguments
       `(#:modules ((guix build utils))
