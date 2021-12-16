@@ -13,8 +13,8 @@
 
 (define-public smoothxg
   (let ((version "0.6.0")
-        (commit "d39280b26e0c72a26a0ab9f7fbbdf22d1474e9ff")
-        (package-revision "9"))
+        (commit "0f383e5033c6af18d95f5d8dca0a6e17e5dbf524")
+        (package-revision "10"))
     (package
      (name "smoothxg")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -27,11 +27,22 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0p57g8kw6pj5kkhh06721xbcdf55x51v1gg8pk9gggdm6kqw9fn1"))))
+                "1k07j3kdydpj420pqxd9qric65qin0gv9p6g0lpp5ljzxyvfwlg3"))))
      (build-system cmake-build-system)
      (arguments
-      `(#:tests? #f
-        #:make-flags (list (string-append "CC=" ,(cc-for-target)))))
+      `(#:phases
+        (modify-phases
+         %standard-phases
+         ;; This stashes our build version in the executable
+         (add-after 'unpack 'set-version
+           (lambda _
+             (mkdir "include")
+             (with-output-to-file "include/smoothxg_git_version.hpp"
+               (lambda ()
+                 (format #t "#define SMOOTHXG_GIT_VERSION \"~a\"~%" version)))
+             #t))
+         (delete 'check))
+        #:make-flags (list ,(string-append "CC=" (cc-for-target)))))
      (native-inputs
       `(("pybind11" ,pybind11)
         ("python" ,python)))
