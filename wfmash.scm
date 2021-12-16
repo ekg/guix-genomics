@@ -8,12 +8,13 @@
   #:use-module (gnu packages compression)
   #:use-module (gnu packages gcc)
   #:use-module (gnu packages jemalloc)
+  #:use-module (gnu packages bioinformatics)
   #:use-module (gnu packages maths))
 
 (define-public wfmash
   (let ((version "0.6.0")
-        (commit "e9a5b0290b71b5f67528634f90f12f616d150d96")
-        (package-revision "17"))
+        (commit "f550954344c2b9563ac4a9d340a03de251332569")
+        (package-revision "19"))
     (package
      (name "wfmash")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -26,17 +27,28 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "00rll7vnydbnwqb7j3j7ys1v0izf4spz9b1n9akc4wfl6n6h4m4y"))))
+                "1xic3c3cxnmyksi9krn628fjl7gjzcm3d75nnzkqqc5cdk936syk"))))
      (build-system cmake-build-system)
      (arguments
-      `(#:tests? #f
-        ;;#:configure-flags '("-DBUILD_TESTING=false")
+      `(#:phases
+        (modify-phases
+         %standard-phases
+         ;; This stashes our build version in the executable
+         (add-after 'unpack 'set-version
+           (lambda _
+             (mkdir "include")
+             (with-output-to-file "include/wfmash_git_version.hpp"
+               (lambda ()
+                 (format #t "#define WFMASH_GIT_VERSION \"~a\"~%" version)))
+             #t))
+         (delete 'check))
         #:make-flags (list (string-append "CC=" ,(cc-for-target))
                            (string-append "CXX=" ,(cxx-for-target)))))
      (inputs
       `(("gcc" ,gcc-11)
         ("gsl" ,gsl)
         ("jemalloc" ,jemalloc)
+        ("htslib" ,htslib)
         ("zlib" ,zlib)))
      (synopsis "base-accurate DNA sequence alignments using WFA and mashmap2")
      (description "wfmash is a fork of MashMap that implements
