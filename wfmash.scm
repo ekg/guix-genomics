@@ -9,13 +9,12 @@
   #:use-module (gnu packages gcc)
   #:use-module (gnu packages jemalloc)
   #:use-module (gnu packages bioinformatics)
-  #:use-module (gnu packages boost)
   #:use-module (gnu packages maths))
 
 (define-public wfmash
   (let ((version "0.7.0")
-        (commit "d348bd4a2bf0447bacaf69c53b98a9075a8e776e")
-        (package-revision "6"))
+        (commit "93c3c673dba4e104547877bb1bcaaff596c3412c")
+        (package-revision "7"))
     (package
      (name "wfmash")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -28,7 +27,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "16lb6wmhq00lxm0k3nf1cvkkhpijn3hm283js2kfpgc69vc8dwq3"))))
+                "162i00whck4zxbmz3hx2jhpcxk3k68g4lscw98k944byl4hz6nry"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -48,7 +47,6 @@
      (inputs
       `(("gcc" ,gcc-11)
         ("gsl" ,gsl)
-        ("boost" ,boost)
         ("jemalloc" ,jemalloc)
         ("htslib" ,htslib)
         ("zlib" ,zlib)))
