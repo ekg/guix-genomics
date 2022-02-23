@@ -13,8 +13,8 @@
 
 (define-public wfmash
   (let ((version "0.7.0")
-        (commit "f61435670570670a3f85620618b07799bbc32093")
-        (package-revision "8"))
+        (commit "2bbd13518a25de326395ad247c0d87d505a52448")
+        (package-revision "9"))
     (package
      (name "wfmash")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -27,7 +27,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0mz91y9gplwkz7qrwy68l31zpsi30jiv4q17jqp63bhpb76v6y11"))))
+                "1hlzzv9a1k4zwxi4df2m3rvich4581aslld7cmc87v5b88v0dlnz"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
