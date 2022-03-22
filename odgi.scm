@@ -5,13 +5,14 @@
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix utils)
   #:use-module (gnu packages gcc)
+  #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages jemalloc)
   #:use-module (gnu packages python))
 
 (define-public odgi
   (let ((version "0.6.3")
-        (commit "ebc493f2622f49f1e67c63c1935d68967cd16d85")
-        (package-revision "1"))
+        (commit "47548999c2a034409882ab0585307cea23700b9a")
+        (package-revision "2"))
     (package
      (name "odgi")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -24,7 +25,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1fkza4xzvgcdd592s2rmjd2pmb63iw6527kd9a2s48da9gw4qbvn"))))
+                "1wzrf7l9y1f808b2i0rqg4q1n5w5lzavsn8w5y1vzig7s1plag6m"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -43,6 +44,7 @@
      (native-inputs
       `(("python" ,python)
         ("jemalloc" ,jemalloc)
+        ("pkg-config" ,pkg-config)
         ("gcc" ,gcc-11)))
      (synopsis "odgi optimized dynamic sequence graph implementation")
      (description
