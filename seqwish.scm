@@ -8,9 +8,9 @@
   #:use-module (gnu packages compression))
 
 (define-public seqwish
-  (let ((version "0.7.3")
-        (commit "88cd0ea5f086cadfaf21c4c363d71536a1a7ea09")
-        (package-revision "2"))
+  (let ((version "0.7.4")
+        (commit "5a159f51b6617c559539ed7283a06b4394a4c7ff")
+        (package-revision "1"))
     (package
      (name "seqwish")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -23,7 +23,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1m165wfcvamfsqqgm4yprb3dk5zvb2mgy3vfxhhnq3sayfhrd6m5"))))
+                "0y3yfh8j7zj1ac3ryk02lm4cgx0ln12xgyi58fr240hsdsf11mgw"))))
      (build-system cmake-build-system)
      (arguments
       `(#:tests? #f
