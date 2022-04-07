@@ -30,7 +30,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "13i91q8fzdh8ms573c32wr99wgk5gj5fhc9abjfy12shmrs3rz1h"))))
+                "19lgxsbbq29b6v6lv21xgg09cx4my8njk8fmmcb0j2s0qhja2a4j"))))
      (build-system trivial-build-system)
      (arguments
       `(#:modules ((guix build utils))
