@@ -9,12 +9,28 @@
   #:use-module (gnu packages python)
   #:use-module (gnu packages wget)
   #:use-module (gnu packages bash)
+  #:use-module (gnu packages algebra)
+  #:use-module (gnu packages base)
+  #:use-module (gnu packages compression)
+  #:use-module (gnu packages bioinformatics)
+  #:use-module (gnu packages build-tools)
+  #:use-module (gnu packages curl)
+  #:use-module (gnu packages gcc)
+  #:use-module (gnu packages gdb)
+  #:use-module (gnu packages haskell-xyz)
+  #:use-module (gnu packages llvm)
+  #:use-module (gnu packages python)
+  #:use-module (gnu packages parallel)
+  #:use-module (gnu packages perl)
+  #:use-module (gnu packages perl6)
+  #:use-module (gnu packages pkg-config)
+  #:use-module (gnu packages ruby)
   #:use-module (gnu packages compression))
 
 (define-public vcflib
-  (let ((version "1.0.1")
-        (commit "40dbb399b5d25ae694e15755724475b274d1b8fe")
-        (package-revision "2"))
+  (let ((version "1.0.3")
+        (commit "a32235f29e5108b228dc008b2970b28fb88a2a23")
+        (package-revision "1"))
     (package
      (name "vcflib")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -27,7 +43,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "04zz3a3glk270prqld7xg4r9mfmanmw2y2vf46j44kxvdxz811rn"))))
+                "1x04f1xwmlpyfjgbmwsz67js5k1aklpc3nihqhb8nsqb7730n7ki"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -40,14 +56,24 @@
                       #t))
          (delete 'check))
         #:make-flags (list "CC=gcc")))
-     (native-inputs
-      `(("wget" ,wget)
-        ("cmake" ,cmake)
-        ("gcc" ,gcc-9)
+     (inputs
+      `(("curl" ,curl)
+        ("fastahack" ,fastahack)
+        ("gcc" ,gcc-11)
+        ("gdb" ,gdb)
+        ("htslib" ,htslib)
+        ("pandoc" ,pandoc)
+        ("perl" ,perl)
+        ("python" ,python)
+        ("ruby" ,ruby)
+        ("tabixpp" ,tabixpp)
+        ("xz" ,xz)
         ("zlib" ,zlib)))
+     (native-inputs
+      `(("pkg-config" ,pkg-config)))
      (synopsis "vcflib variant call file (VCF) manipulation and analysis")
      (description
-"vcflib provides methods to manipulate and interpret sequence variation as it
+      "vcflib provides methods to manipulate and interpret sequence variation as it
 can be described by VCF.  It is both: an API for parsing and operating on
 records of genomic variation as it can be described by the VCF format, and a
 collection of command-line utilities for executing complex manipulations on VCF
