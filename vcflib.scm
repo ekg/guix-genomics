@@ -30,8 +30,8 @@
 
 (define-public vcflib
   (let ((version "1.0.3")
-        (commit "b4290b6ec25a893fc3533fe02787e9a25b5c749d")
-        (package-revision "6"))
+        (commit "b788c869d651efade17305dca137417d066b2a1f")
+        (package-revision "7"))
     (package
      (name "vcflib")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -44,7 +44,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0w53g9fw0mrzsd87a48v11r44jj0kl0wj9lb7l0xxi9cm1ll99fg"))))
+                "0qjqp5mh3nzdhj8adxl4vxj3xhpaix4709l4689v4h6wbmh67m4d"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
