@@ -20,6 +20,7 @@
   #:use-module (gnu packages haskell-xyz)
   #:use-module (gnu packages llvm)
   #:use-module (gnu packages python)
+  #:use-module (gnu packages python-xyz)
   #:use-module (gnu packages parallel)
   #:use-module (gnu packages perl)
   #:use-module (gnu packages perl6)
@@ -29,8 +30,8 @@
 
 (define-public vcflib
   (let ((version "1.0.3")
-        (commit "0afe84191a280b910c4c22366cc97f4be1fd51d3")
-        (package-revision "3"))
+        (commit "ca9de4f3f359b0a607ecedc97faccd675ea4fc56")
+        (package-revision "4"))
     (package
      (name "vcflib")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -43,7 +44,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "05ifijm3x8yqs5yrj0wx7524zcznbskxf55is6xssmiinsc9yk6l"))))
+                "1qn7piq49cpiq7mf8d7b24s6k0rff0jya5lhhjb9fh6g2m3ba3p9"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -65,6 +66,7 @@
         ("pandoc" ,pandoc)
         ("perl" ,perl)
         ("python" ,python)
+        ("pybind11" ,pybind11)
         ("ruby" ,ruby)
         ("tabixpp" ,tabixpp)
         ("xz" ,xz)
