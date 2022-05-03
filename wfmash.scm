@@ -14,7 +14,7 @@
 (define-public wfmash
   (let ((version "0.8.1")
         (commit "bc4b32cbafab98746b6cc978f49baaeea23c8491")
-        (package-revision "3"))
+        (package-revision "4"))
     (package
      (name "wfmash")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
