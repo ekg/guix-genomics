@@ -12,22 +12,22 @@
   #:use-module (gnu packages maths))
 
 (define-public wfmash
-  (let ((version "0.8.1")
-        (commit "bc4b32cbafab98746b6cc978f49baaeea23c8491")
-        (package-revision "4"))
+  (let ((version "0.8.2")
+        (commit "48493fbe2d7e65b7e371b8940590c88dac13e4ad")
+        (package-revision "1"))
     (package
      (name "wfmash")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
      (source (origin
               (method git-fetch)
               (uri (git-reference
-                    (url "https://github.com/ekg/wfmash.git")
+                    (url "https://github.com/waveygang/wfmash.git")
                     (commit commit)
                     (recursive? #f)))
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0lb9901scy18yj4190x9408a7w7rxxqrxfimyzivjf23k03knjbj"))))
+                "1cwx7qrwjq92b9djiwm5ykac236kw1mv0x032kz71ja4ql2n8cr4"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
