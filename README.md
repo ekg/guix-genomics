@@ -17,6 +17,9 @@ If the guix-genomics repository directory were in your home directory, you might
 GUIX_PACKAGE_PATH=~/guix-genomics guix package -i wfmash
 ```
 
+You do this to tell where guix to look for additional package specifications.
+These specifications live in the scheme definitions in this repository.
+
 ## updating
 
 To build and update a package, first change the commit id and/or version in its .scm file and then run:
