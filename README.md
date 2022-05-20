@@ -4,11 +4,17 @@ This repo contains guix package definitions (aka guile build scripts) for bioinf
 
 ## usage
 
-To install packages from these definitions, specify the `GUIX_PACKAGE_PATH`.
-For instance, to install edyeet:
+To install packages from these definitions, **specify the path of this repository** as your `GUIX_PACKAGE_PATH`.
+For instance, to install `wfmash` from within this repository directory:
 
 ```bash
-GUIX_PACKAGE_PATH=. guix package -i edyeet
+GUIX_PACKAGE_PATH=. guix package -i wfmash
+```
+
+If the guix-genomics repository directory were in your home directory, you might do this:
+
+```bash
+GUIX_PACKAGE_PATH=~/guix-genomics guix package -i wfmash
 ```
 
 ## updating
