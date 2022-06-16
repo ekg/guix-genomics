@@ -8,13 +8,14 @@
   #:use-module (gnu packages compression)
   #:use-module (gnu packages gcc)
   #:use-module (gnu packages jemalloc)
+  #:use-module (gnu packages version-control)
   #:use-module (gnu packages bioinformatics)
   #:use-module (gnu packages maths))
 
 (define-public wfmash
   (let ((version "0.8.2")
-        (commit "19234a4a153ea3f3acce6f4ac192afc70bbb7fda")
-        (package-revision "10"))
+        (commit "c4e3bffcc006c324233474685668c1e4fd95b46e")
+        (package-revision "12"))
     (package
      (name "wfmash")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -27,7 +28,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0xkbiniv2bp07s65disw4d5vn5vk3sik7pn6vclmizy32819jl1i"))))
+                "1x1hmlxm4546r3qpfd1r67q3qakwva06k891rylmmdijm5wgkw5c"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -49,6 +50,7 @@
         ("gsl" ,gsl)
         ("jemalloc" ,jemalloc)
         ("htslib" ,htslib)
+        ("git" ,git)
         ("zlib" ,zlib)))
      (synopsis "base-accurate DNA sequence alignments using WFA and mashmap2")
      (description "wfmash is a fork of MashMap that implements
