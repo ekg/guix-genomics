@@ -6,6 +6,7 @@
   #:use-module (wfmash)
   #:use-module (seqwish)
   #:use-module (smoothxg)
+  #:use-module (vcflib)
   #:use-module (odgi)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
@@ -17,8 +18,8 @@
 
 (define-public pggb
   (let ((version "0.3.1")
-        (commit "237bf05daa186424ecf639dbb956364e245cd9e9")
-        (package-revision "9"))
+        (commit "15a42e2ac114efffa6c9d9f9a0c1a063f327d7b7")
+        (package-revision "10"))
     (package
      (name "pggb")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -30,7 +31,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1s2zshczdpa9psn2l1qg4dj55xn7a4vmimpyswn683zz20k8wys0"))))
+                "0l095mbk91rqlib549agbsivnsx0j6iw9gi0gyqsw8xpjc5c3g9k"))))
      (build-system trivial-build-system)
      (arguments
       `(#:modules ((guix build utils))
@@ -51,6 +52,7 @@
                                    ,(string-append (assoc-ref %build-inputs "pigz") "/bin")
                                    ,(string-append (assoc-ref %build-inputs "seqwish") "/bin")
                                    ,(string-append (assoc-ref %build-inputs "smoothxg") "/bin")
+                                   ,(string-append (assoc-ref %build-inputs "vcflib") "/bin")
                                    ,(string-append (assoc-ref %build-inputs "time") "/bin")
                                    ,(string-append (assoc-ref %build-inputs "gfaffix") "/bin")
                                    ,(string-append (assoc-ref %build-inputs "wfmash") "/bin"))))
@@ -63,6 +65,7 @@
         ("pigz" ,pigz)
         ("seqwish" ,seqwish)
         ("smoothxg" ,smoothxg)
+        ("vcflib" ,vcflib-dev)
         ("time" ,time)
         ("gfaffix" ,gfaffix)
         ("wfmash" ,wfmash)))

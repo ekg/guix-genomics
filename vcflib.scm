@@ -28,7 +28,7 @@
   #:use-module (gnu packages ruby)
   #:use-module (gnu packages compression))
 
-(define-public vcflib
+(define-public vcflib-dev
   (let ((version "1.0.3")
         (commit "fdcdaadc2f94332e1d26afa765444b6ae0a57e05")
         (package-revision "10"))
