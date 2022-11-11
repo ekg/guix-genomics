@@ -17,9 +17,9 @@
   #:use-module (gnu packages time))
 
 (define-public pggb
-  (let ((version "0.4.0")
-        (commit "f0db7db3c79ce6ff011bffb402b01369c40bd174")
-        (package-revision "2"))
+  (let ((version "0.5.1")
+        (commit "586b56a8116f13e70c0c358e95a17234240557d0")
+        (package-revision "1"))
     (package
      (name "pggb")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
