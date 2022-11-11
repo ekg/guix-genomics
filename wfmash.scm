@@ -15,9 +15,9 @@
   #:use-module (gnu packages maths))
 
 (define-public wfmash
-  (let ((version "0.9.2")
+  (let ((version "0.10.0")
         (commit "ee014bf445db719f96af79ae4e33d81846b33e14")
-        (package-revision "4"))
+        (package-revision "1"))
     (package
      (name "wfmash")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
