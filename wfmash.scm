@@ -4,18 +4,20 @@
   #:use-module (guix git-download)
   #:use-module (guix build-system cmake)
   #:use-module ((guix licenses) #:prefix license:)
+  #:use-module (gnu software make)
   #:use-module (gnu packages)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages gcc)
   #:use-module (gnu packages jemalloc)
   #:use-module (gnu packages version-control)
   #:use-module (gnu packages bioinformatics)
+  #:use-module (gnu packages multiprecision)
   #:use-module (gnu packages maths))
 
 (define-public wfmash
   (let ((version "0.9.2")
-        (commit "f3ea2ed6567e23cde278c409dab68096cbf22e7f")
-        (package-revision "3"))
+        (commit "ee014bf445db719f96af79ae4e33d81846b33e14")
+        (package-revision "4"))
     (package
      (name "wfmash")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -28,7 +30,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1paxvgygcalsj59xqp44vqmd3y106zjvy76hrbknlkfmsq8gsfdz"))))
+                "1fihj31d55gvnljcsd7gmgphmpw5djhv06nb2p5pa1dqiaxnawxj"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -48,6 +50,8 @@
      (inputs
       `(("gcc" ,gcc-11)
         ("gsl" ,gsl)
+        ("gmp" ,gmp)
+        ("make" ,make)
         ("jemalloc" ,jemalloc)
         ("htslib" ,htslib)
         ("git" ,git)
