@@ -2,7 +2,7 @@
   #:use-module (guix packages)
   #:use-module (guix git-download)
   #:use-module (guix build-system trivial)
-  #:use-module (gfaffix)
+  ;#:use-module (gfaffix)
   #:use-module (wfmash)
   #:use-module (seqwish)
   #:use-module (smoothxg)
@@ -31,7 +31,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0ylhh1rxw3qzzsq2ykzprxmczr39i5zxzrh10qlq1y67azajw9gg"))))
+                "1gishhcydr4fqbk2j4gki6599fpbl6cid94j8d0nip1zg70ax9ya"))))
      (build-system trivial-build-system)
      (arguments
       `(#:modules ((guix build utils))
@@ -54,7 +54,7 @@
                                    ,(string-append (assoc-ref %build-inputs "smoothxg") "/bin")
                                    ,(string-append (assoc-ref %build-inputs "vcflib") "/bin")
                                    ,(string-append (assoc-ref %build-inputs "time") "/bin")
-                                   ,(string-append (assoc-ref %build-inputs "gfaffix") "/bin")
+                                   ;,(string-append (assoc-ref %build-inputs "gfaffix") "/bin")
                                    ,(string-append (assoc-ref %build-inputs "wfmash") "/bin"))))
             #t))))
      (inputs
