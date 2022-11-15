@@ -67,7 +67,7 @@
         ("smoothxg" ,smoothxg)
         ("vcflib" ,vcflib-dev)
         ("time" ,time)
-        ("gfaffix" ,gfaffix)
+        ;("gfaffix" ,gfaffix)
         ("wfmash" ,wfmash)))
      (synopsis "Pangenome graph builder")
      (description "This pangenome graph construction pipeline renders
