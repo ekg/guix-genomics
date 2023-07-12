@@ -3,6 +3,7 @@
   #:use-module (guix packages)
   #:use-module (guix git-download)
   #:use-module (guix build-system cmake)
+  #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages base)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
@@ -15,9 +16,9 @@
   #:use-module (gnu packages maths))
 
 (define-public wfmash
-  (let ((version "0.10.0")
-        (commit "2aaba270406b3088bca2a5ed61f2c8105db25c72")
-        (package-revision "3"))
+  (let ((version "0.10.4")
+        (commit "0981b92939cd1731c9fb5c6a7dcfd1352be4e071")
+        (package-revision "2"))
     (package
      (name "wfmash")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -30,7 +31,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1mc899a9k7mhjj371c9a5fjj5ya03l2q3ja7gbnx1s06slbc3drh"))))
+                "0brr9sbmsg5kp9x3a0ahjms6w2qih3ccc709hvdb259rds6zfrxd"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
@@ -48,10 +49,11 @@
         #:make-flags (list (string-append "CC=" ,(cc-for-target))
                            (string-append "CXX=" ,(cxx-for-target)))))
      (inputs
-      `(("gcc" ,gcc-11)
+      `(("gcc" ,gcc-12)
         ("gsl" ,gsl)
         ("gmp" ,gmp)
         ("make" ,gnu-make)
+        ("pkg-config" ,pkg-config)
         ("jemalloc" ,jemalloc)
         ("htslib" ,htslib)
         ("git" ,git)
