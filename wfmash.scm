@@ -16,12 +16,12 @@
   #:use-module (gnu packages maths))
 
 (define-public wfmash
-  (let ((version "0.10.4")
-        (commit "591f91e7e1bb468e03b7be31356f2f34bce6deb9")
-        (package-revision "4"))
+  (let ((version "0.10.5")
+        (commit "3b86528b7f83ff23a74ad14d9302b8f73c246f91")
+        (package-revision "1"))
     (package
      (name "wfmash")
-     (version (string-append version "+" (string-take commit 7) "-" package-revision))
+     (version (string-append version "-" package-revision "+" (string-take commit 7)))
      (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -31,7 +31,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1ag39x2p31zghmw99fdg67jqbpk4s4vl6812a0kjx5ngpcw6rqsc"))))
+                "0n7j1x3jd9zy25pqsal8qwnpgnqbdq7xnppsbiw8m4zbhgn1gc9g"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
