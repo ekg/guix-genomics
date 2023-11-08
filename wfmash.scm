@@ -15,7 +15,7 @@
   #:use-module (gnu packages multiprecision)
   #:use-module (gnu packages maths))
 
-(define-public wfmash
+(define-public wfmash-0.12.0
   (let ((version "0.12.0")
         (commit "bcfbc14eff4874cda59c66a678fb7d69a31671c5")
         (package-revision "1"))

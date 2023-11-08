@@ -3,23 +3,23 @@
   #:use-module (guix git-download)
   #:use-module (guix build-system trivial)
   ;#:use-module (gfaffix)
-  #:use-module (wfmash)
   #:use-module (seqwish)
   #:use-module (smoothxg)
-  #:use-module (vcflib)
   #:use-module (odgi)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
   #:use-module (gnu packages algebra)
+  #:use-module (gnu packages bioinformatics)
+  #:use-module (wfmash)
   #:use-module (gnu packages bash)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages guile)
   #:use-module (gnu packages time))
 
 (define-public pggb
-  (let ((version "0.5.1")
-        (commit "586b56a8116f13e70c0c358e95a17234240557d0")
-        (package-revision "1"))
+  (let ((version "0.5.4")
+        (commit "d1cc34b840bcdf8570546c3aa35d9bf6868b60e7")
+        (package-revision "2"))
     (package
      (name "pggb")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -31,7 +31,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1gishhcydr4fqbk2j4gki6599fpbl6cid94j8d0nip1zg70ax9ya"))))
+                "11sr6bjpjjzi0aqqq3dwgn9cpg86v966db2v3nzd17ani9s73dv7"))))
      (build-system trivial-build-system)
      (arguments
       `(#:modules ((guix build utils))
@@ -65,10 +65,10 @@
         ("pigz" ,pigz)
         ("seqwish" ,seqwish)
         ("smoothxg" ,smoothxg)
-        ("vcflib" ,vcflib-dev)
+        ("vcflib" ,vcflib)
         ("time" ,time)
         ;("gfaffix" ,gfaffix)
-        ("wfmash" ,wfmash)))
+        ("wfmash" ,wfmash-0.12.0)))
      (synopsis "Pangenome graph builder")
      (description "This pangenome graph construction pipeline renders
 a collection of sequences into a pangenome graph (in the variation
