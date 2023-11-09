@@ -15,9 +15,9 @@
   #:use-module (gnu packages multiprecision)
   #:use-module (gnu packages maths))
 
-(define-public wfmash-0.12.0
-  (let ((version "0.12.0")
-        (commit "bcfbc14eff4874cda59c66a678fb7d69a31671c5")
+(define-public wfmash
+  (let ((version "0.12.1")
+        (commit "8a59d78a3bd243e63a9162369d1440db4d0799bf")
         (package-revision "1"))
     (package
      (name "wfmash")
@@ -31,7 +31,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1fwwcb6r3fm1hhzw4ph4j3bvd11bdndi2kzjz2gk28mmqgkmvwyl"))))
+                "1zxj6kialf14y8d07s3lps8c1fc0pv6ks1hyx60mdp6lxlikk5gi"))))
      (build-system cmake-build-system)
      (arguments
       `(#:phases
