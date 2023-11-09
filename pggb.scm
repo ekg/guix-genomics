@@ -19,7 +19,7 @@
 (define-public pggb
   (let ((version "0.5.4")
         (commit "d1cc34b840bcdf8570546c3aa35d9bf6868b60e7")
-        (package-revision "2"))
+        (package-revision "3"))
     (package
      (name "pggb")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -66,6 +66,7 @@
         ("seqwish" ,seqwish)
         ("smoothxg" ,smoothxg)
         ("vcflib" ,vcflib)
+        ("bcftools" ,bcftools)
         ("time" ,time)
         ;("gfaffix" ,gfaffix)
         ("wfmash" ,wfmash-0.12.0)))
