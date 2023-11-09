@@ -19,7 +19,7 @@
 (define-public pggb
   (let ((version "0.5.4")
         (commit "d1cc34b840bcdf8570546c3aa35d9bf6868b60e7")
-        (package-revision "4"))
+        (package-revision "5"))
     (package
      (name "pggb")
      (version (string-append version "+" (string-take commit 7) "-" package-revision))
@@ -70,7 +70,7 @@
         ("bcftools" ,bcftools)
         ("time" ,time)
         ;("gfaffix" ,gfaffix)
-        ("wfmash" ,wfmash-0.12.0)))
+        ("wfmash" ,wfmash-0.12.1)))
      (synopsis "Pangenome graph builder")
      (description "This pangenome graph construction pipeline renders
 a collection of sequences into a pangenome graph (in the variation
